@@ -8,13 +8,13 @@
       <div class="ipt">
         <div class="lal">账号</div>
         <div>
-          <input v-model="loginInfo.account" type="text">
+          <input v-model.trim="loginInfo.account" type="text">
         </div>
       </div>
       <div class="ipt">
         <div class="lal">密码</div>
         <div>
-          <input v-model="loginInfo.password" type="password">
+          <input v-model.trim="loginInfo.password" type="password">
         </div>
       </div>
       <div class="fun">
@@ -22,20 +22,61 @@
         <a style="float: right;font-size: 14px;color:white">找回密码</a>
       </div>
       <div class="btn">
-        <button style="float: left;margin-left: 25px">学生登入</button>
-        <button style="float: right;margin-right: 100px">教师登入</button>
+        <button style="float: left;margin-left: 25px" v-throttle:1000="stuLogin">学生登入</button>
+        <button style="float: right;margin-right: 100px" v-throttle:1000="thLogin">教师登入</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
+import {commonTip} from "@/utils/tip";
+import axios from "axios";
+import {stu_login, th_login} from "@/utils/api_path";
 
 const loginInfo=reactive({
   account:'',
   password:''
 })
+
+function isNull(){
+  return !(loginInfo.password&&loginInfo.account)
+}
+
+function stuLogin(){
+  if(isNull()){
+    commonTip('error', '账号或密码不能为空');
+  }else {
+    axios.post(stu_login,loginInfo).then(response=>{
+      if(response){
+        alert('登入成功！')
+        console.log(response.msg);
+        localStorage.setItem('account',loginInfo.account)
+        }
+    })
+  }
+}
+
+function thLogin(){
+  if(isNull()){
+    commonTip('error', '账号或密码不能为空');
+  }else {
+    axios.post(th_login,loginInfo).then(response=> {
+      if (response){
+        alert('登入成功！')
+        console.log(response.msg);
+        localStorage.setItem('account',loginInfo.account)
+      }
+    })
+  }
+}
+
+onMounted(()=>{
+  if(localStorage.getItem('account'))
+    loginInfo.account=localStorage.getItem('account')
+})
+
 </script>
 
 <style scoped>
@@ -71,7 +112,7 @@ const loginInfo=reactive({
     border-radius: 10px;
     position: absolute;
     left: 25%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%,-50%);
     padding: 10px;
   }

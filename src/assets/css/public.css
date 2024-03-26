@@ -1,0 +1,7 @@
+.contain{
+    box-sizing: border-box;
+    width: 1200px;
+    margin: 0 auto;
+    border-left: #d5d2d2 2px solid ;
+    border-right: #d5d2d2 2px solid ;
+}
