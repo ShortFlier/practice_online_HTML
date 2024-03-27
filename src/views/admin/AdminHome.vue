@@ -126,6 +126,6 @@ onMounted(()=>{
   border-bottom: 5px #dcc351 solid;
 }
 .display{
-  padding: 0 5px;
+  padding: 10px 5px;
 }
 </style>

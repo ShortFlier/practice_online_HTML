@@ -34,6 +34,7 @@ import {onMounted, reactive} from "vue";
 import {commonTip} from "@/utils/tip";
 import axios from "axios";
 import {stu_login, th_login} from "@/utils/api_path";
+import store from "@/store";
 
 const loginInfo=reactive({
   account:'',
@@ -51,7 +52,8 @@ function stuLogin(){
     axios.post(stu_login,loginInfo).then(response=>{
       if(response){
         alert('登入成功！')
-        console.log(response.msg);
+        store.token=response.msg
+        localStorage.setItem('token',response.msg)
         localStorage.setItem('account',loginInfo.account)
         }
     })
@@ -65,7 +67,8 @@ function thLogin(){
     axios.post(th_login,loginInfo).then(response=> {
       if (response){
         alert('登入成功！')
-        console.log(response.msg);
+        store.token=response.msg
+        localStorage.setItem('token',response.msg)
         localStorage.setItem('account',loginInfo.account)
       }
     })

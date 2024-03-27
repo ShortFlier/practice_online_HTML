@@ -1,6 +1,7 @@
 // axios全局配置文件
 import axios from 'axios'
 import {commonTip} from "@/utils/tip";
+import store from "@/store";
 // 配置访问主机
 axios.defaults.baseURL='/api';
 
@@ -17,5 +18,21 @@ axios.interceptors.response.use(
         }
     }
 );
+
+axios.interceptors.request.use(
+    config => {
+        const token = store.state.token;
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+            config.headers['token'] = token; // 添加token字段
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+
 
 

@@ -23,6 +23,7 @@ import {commonTip} from "@/utils/tip";
 import axios from "axios";
 import {admin_login} from "@/utils/api_path";
 import router from "@/router";
+import store from "@/store";
 
 const loginInfo=reactive({
   account:'',
@@ -39,7 +40,8 @@ function login(){
   }else {
     axios.post(admin_login,loginInfo).then(response=>{
       if(response){
-        console.log(response.msg);
+        store.token=response.msg
+        localStorage.setItem('token',response.msg)
         localStorage.setItem('admin_account',loginInfo.account)
         router.push('/admin/home')
       }
