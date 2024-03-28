@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="text" placeholder="输入关键字查找学科" v-model.trim="searchInfo.key"/>
+    <input type="search" placeholder="输入关键字查找学科" v-model.trim="searchInfo.key"/>
     <el-button type="primary" circle style="position: relative; left: 10px" v-throttle:1000="getSubData">
       <i class="bi bi-search" style="font-size: 24px"></i>
     </el-button>
@@ -8,7 +8,7 @@
       <i class="bi bi-plus-lg" style="font-size: 24px"></i>
     </el-button>
     <div style="display: inline-block;position: relative;left: 90px" >
-      <input type="text" placeholder="输入学科名添加学科" @input="getLikeName" v-model.trim="addInfo.name" class="add"/>
+      <input type="search" placeholder="输入学科名添加学科" @input="getLikeName" v-model.trim="addInfo.name" class="add"/>
       <div class="tip">
         <div v-for="item in addInfo.tipName" :key="item" style="color: #dcc351;font-weight: bold">
           {{item}}
@@ -45,7 +45,6 @@ import {onMounted, reactive} from "vue";
 import axios from "axios";
 import {subject_admin_add, subject_delete, subject_getData, subject_like_name} from "@/utils/api_path";
 import {commonTip, confirmationBox} from "@/utils/tip";
-import store from "@/store";
 // 学科数据
 const subjectData=reactive({
   total:0,
