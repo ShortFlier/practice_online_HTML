@@ -25,8 +25,8 @@
     </div>
   </div>
   <div class="search">
-    <input type="search" placeholder="输入姓名查找" v-model.trim="allInfo.searchInfo.name"/>
-    <input type="search" placeholder="输入账号查找" v-model.trim="allInfo.searchInfo.account"/>
+    <input type="search" placeholder="姓名匹配" v-model.trim="allInfo.searchInfo.name"/>
+    <input type="search" placeholder="账号匹配" v-model.trim="allInfo.searchInfo.account"/>
     <el-button type="primary" circle style="position: relative; left: 10px;height: 35px" v-throttle:1000="getData" >
       <i class="bi bi-search" style="font-size: 18px"></i>
     </el-button>
@@ -37,8 +37,8 @@
       <el-table-column prop="name" label="昵称" width="220" />
       <el-table-column prop="email" label="邮箱号" width="220" />
       <el-table-column fixed="right" label="操作" width="80">
-        <template >
-          <el-button link type="primary" size="small">
+        <template v-slot="scope">
+          <el-button link type="primary" size="small" @click="look(scope.row)">
             查看
           </el-button>
         </template>
@@ -48,6 +48,9 @@
   <div class="page">
     <Page :total="allInfo.result.total" @pageChange="setPage"></Page>
   </div>
+  <Mask :isShow="allInfo.isShow" @close="close">
+    <UserInfo :type="allInfo.slt" :account="allInfo.account"></UserInfo>
+  </Mask>
 </template>
 
 <script setup>
@@ -56,6 +59,8 @@ import Page from "@/components/Page.vue";
 import axios from "axios";
 import {stu_page, th_page, th_total,stu_total} from "@/utils/api_path";
 import {commonTip} from "@/utils/tip";
+import Mask from "@/components/Mask.vue";
+import UserInfo from "@/components/UserInfo.vue";
 
 const allInfo=reactive({
   slt:'教师',
@@ -72,9 +77,14 @@ const allInfo=reactive({
   pageInfo:{
       page:0,
     pageSize:5
-  }
+  },
+  isShow:false,
+  account:''
 })
-watch(allInfo.slt,()=>{
+function close(){
+  allInfo.isShow=false
+}
+watch(()=> allInfo.slt,()=>{
   allInfo.result.total=0
   allInfo.result.rows=[]
 })
@@ -134,6 +144,11 @@ onMounted(()=>{
       allInfo.stuTotal=resolve.data
   })
 })
+// 用户信息查看
+function look(value){
+  allInfo.isShow=true
+  allInfo.account=value.account
+}
 </script>
 
 <style scoped>
@@ -152,7 +167,7 @@ onMounted(()=>{
 .search input{
   margin-right: 40px;
   width: 180px;
-  height: 25px;
+  height: 30px;
   font-size: 20px;
 }
 .table{
@@ -163,5 +178,8 @@ onMounted(()=>{
 }
 .page{
   margin-left: 30px;
+}
+input::placeholder {
+  font-size: 12px; /* 设置提示文字的字体大小为12px */
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="search" placeholder="输入关键字查找学科" v-model.trim="searchInfo.key"/>
+    <input type="search" placeholder="学科名匹配(不区分大小写)" v-model.trim="searchInfo.key"/>
     <el-button type="primary" circle style="position: relative; left: 10px" v-throttle:1000="getSubData">
       <i class="bi bi-search" style="font-size: 24px"></i>
     </el-button>
@@ -10,6 +10,7 @@
     <div style="display: inline-block;position: relative;left: 90px" >
       <input type="search" placeholder="输入学科名添加学科" @input="getLikeName" v-model.trim="addInfo.name" class="add"/>
       <div class="tip">
+        <label style="position: relative;right: 68px;font-weight: bold;color: #3099e8">相似学科：</label>
         <div v-for="item in addInfo.tipName" :key="item" style="color: #dcc351;font-weight: bold">
           {{item}}
         </div>
@@ -130,8 +131,8 @@ onMounted(()=>{
   padding-top: 30px;
 }
 .search input{
-  height: 30px;
-  font-size: 25px;
+  height: 35px;
+  font-size: 20px;
 }
 .search>button{
   height: 40px;
@@ -155,5 +156,8 @@ onMounted(()=>{
 }
 .add:focus + .tip {
   display: block;
+}
+input::placeholder {
+  font-size: 12px; /* 设置提示文字的字体大小为12px */
 }
 </style>
