@@ -52,8 +52,12 @@ function stuLogin(){
     axios.post(stu_login,loginInfo).then(response=>{
       if(response){
         alert('登入成功！')
-        store.token=response.msg
-        localStorage.setItem('token',response.msg)
+        store.state.identity='student'
+        store.state.account=response.data.account
+        store.state.token=response.msg
+        sessionStorage.setItem('identity',store.state.identity)
+        sessionStorage.setItem('account',store.state.account)
+        sessionStorage.setItem('token',store.state.token)
         localStorage.setItem('account',loginInfo.account)
         }
     })
@@ -67,8 +71,12 @@ function thLogin(){
     axios.post(th_login,loginInfo).then(response=> {
       if (response){
         alert('登入成功！')
-        store.token=response.msg
-        localStorage.setItem('token',response.msg)
+        store.state.identity='teacher'
+        store.state.account=response.data.account
+        store.state.token=response.msg
+        sessionStorage.setItem('identity',store.state.identity)
+        sessionStorage.setItem('account',store.state.account)
+        sessionStorage.setItem('token',store.state.token)
         localStorage.setItem('account',loginInfo.account)
       }
     })

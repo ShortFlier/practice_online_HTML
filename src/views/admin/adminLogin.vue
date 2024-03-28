@@ -40,8 +40,12 @@ function login(){
   }else {
     axios.post(admin_login,loginInfo).then(response=>{
       if(response){
-        store.token=response.msg
-        localStorage.setItem('token',response.msg)
+        store.state.identity='admin'
+        store.state.account=response.data.account
+        store.state.token=response.msg
+        sessionStorage.setItem('identity',store.state.identity)
+        sessionStorage.setItem('account',store.state.account)
+        sessionStorage.setItem('token',store.state.token)
         localStorage.setItem('admin_account',loginInfo.account)
         router.push('/admin/home')
       }
