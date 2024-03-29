@@ -41,7 +41,7 @@ function close(){
   width: 100%;
   height: 100%;
   background-color: rgba(213, 210, 210, 0.3);
-  z-index: 99999999999;
+  z-index: 666;
 }
 .content{
   position: absolute;

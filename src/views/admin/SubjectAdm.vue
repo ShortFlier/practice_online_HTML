@@ -28,7 +28,7 @@
           <el-button link type="danger" size="small" @click="handleDle(scope.row)">
             删除
           </el-button>
-          <el-button link type="primary" size="small">
+          <el-button link type="primary" size="small" @click="amend(scope.row)">
             修改
           </el-button>
         </template>
@@ -38,14 +38,32 @@
   <div class="page">
     <Page :total="subjectData.total" @pageChange="setPage"></Page>
   </div>
+  <Mask :isShow="isShow" @close="close">
+    <div style="text-align: center;width: 400px;font-size: 35px;font-weight: bolder">
+      <label>{{rawName}}</label>
+    </div>
+    <div style="text-align: center;color: #3099e8;padding: 20px">
+      <label>改为</label>
+    </div>
+    <div style="text-align: center;padding: 10px">
+      <input class="newName" v-model.trim="subAmd.name" type="search" >
+    </div>
+    <div style="text-align: center;padding: 10px">
+      <el-button type="success" circle v-throttle:1000="upd">
+        <i class="bi bi-pen" style="font-size: 20px"></i>
+      </el-button>
+    </div>
+  </Mask>
 </template>
 
 <script setup>
 import Page from "@/components/Page.vue";
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
-import {subject_admin_add, subject_delete, subject_getData, subject_like_name} from "@/utils/api_path";
+import {sub_update, subject_admin_add, subject_delete, subject_getData, subject_like_name} from "@/utils/api_path";
 import {commonTip, confirmationBox} from "@/utils/tip";
+import Mask from "@/components/Mask.vue";
+import {connectPath} from "@/utils/util";
 // 学科数据
 const subjectData=reactive({
   total:0,
@@ -117,6 +135,39 @@ function dleByName(name){
     }
   })
 }
+// 控制mask
+const isShow=ref(false);
+function close(){
+  isShow.value=false
+}
+//修改
+const subAmd=reactive({
+  name:'',
+  id:'',
+})
+const rawName=ref('')
+function amend(row){
+  isShow.value=true
+  subAmd.id=row.id
+  rawName.value=row.name
+}
+//前往数据库修改
+function upd(){
+  if(subAmd.name){
+    const path=connectPath(subAmd)
+    console.log(path)
+    console.log(subAmd)
+    confirmationBox('你确定要将"'+rawName.value+'"改为"'+subAmd.name+'"吗？','warning',()=>{
+      axios.post(sub_update,subAmd).then(resolve=>{
+        if(resolve){
+          commonTip('success',resolve.msg)
+          setTimeout(()=>{isShow.value=false,subAmd.name=''},500)
+          getSubData()
+        }
+      })
+    })
+  }
+}
 onMounted(()=>{
   getSubData()
 })
@@ -159,5 +210,17 @@ onMounted(()=>{
 }
 input::placeholder {
   font-size: 12px; /* 设置提示文字的字体大小为12px */
+}
+.newName{
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 26px;
+}
+.newName:focus{
+  border: none;
+  outline: none;
+  border-bottom: 2px solid black;
 }
 </style>

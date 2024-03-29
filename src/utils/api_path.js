@@ -22,4 +22,7 @@ export const stu_page='/student/gets'
 export const stu_total='/student/getActs'
 
 export const get_th_info='/teacher/'
+
 export const get_stu_info='/student/'
+
+export const sub_update='/subject/update'
