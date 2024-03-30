@@ -9,6 +9,8 @@ import TopicAdm from "@/views/admin/TopicAdm.vue";
 import TestAdm from "@/views/admin/TestAdm.vue";
 import AuditAdm from "@/views/admin/AuditAdm.vue";
 import Else from "@/views/admin/Else.vue";
+import SubAudit from "@/views/admin/SubAudit.vue";
+import TopicAudit from "@/views/admin/TopicAudit.vue";
 
 const routes = [
   {
@@ -50,7 +52,18 @@ const routes = [
       },
       {
         path:'auditAdmin',
-        component: AuditAdm
+        component: AuditAdm,
+        redirect: '/admin/home/auditAdmin/subAudit',
+        children:[
+          {
+            path:'subAudit',
+            component:SubAudit
+          },
+          {
+            path: 'topicAudit',
+            component: TopicAudit
+          }
+        ]
       },
       {
         path:'else',
