@@ -131,8 +131,13 @@ function getUserData(){
     console.log('none')
   }
 }
+watch(()=>allInfo.slt,()=>{
+  sessionStorage.setItem('user_adm_select',allInfo.slt)
+})
 // 账号统计
 onMounted(()=>{
+  if(sessionStorage.getItem('user_adm_select'))
+    allInfo.slt=sessionStorage.getItem('user_adm_select')
 //   统计教师
   axios.get(th_total).then(resolve=>{
     if(resolve)

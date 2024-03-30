@@ -26,3 +26,5 @@ export const get_th_info='/teacher/'
 export const get_stu_info='/student/'
 
 export const sub_update='/subject/update'
+
+export const sub_get_by_audit='/subject/get'

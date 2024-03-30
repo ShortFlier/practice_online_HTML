@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="nav">
     <label class="subject transition left-label" id="subject">学科审核</label>
     <div class="button transition left-button" v-throttle:1300="turn" id="button">
       <div class="circle transition left-circle" id="circle">
       </div>
     </div>
-    <label class="topic transition" id="topic">题目审核</label>
+    <label class="topic transition common" id="topic" >题目审核</label>
   </div>
   <div class="display">
     <router-view></router-view>
@@ -44,6 +44,8 @@ function doThen(){
     circle.classList.add('right-circle')
     circle.classList.add('translate')
     subject.classList.remove('left-label')
+    subject.classList.add('common')
+    topic.classList.remove('common')
     topic.classList.add('right-label')
   }else{ //值为2 删除left样式，加上right样式
     button.classList.remove('right-button')
@@ -52,6 +54,8 @@ function doThen(){
     circle.classList.add('left-circle')
     circle.classList.remove('translate')
     subject.classList.add('left-label')
+    subject.classList.remove('common')
+    topic.classList.add('common')
     topic.classList.remove('right-label')
   }
 }
@@ -119,5 +123,8 @@ onMounted(()=>{
 .display{
   border-top: #999999 2px solid;
   padding: 10px;
+}
+.common{
+  color: #999999;
 }
 </style>
