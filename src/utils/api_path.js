@@ -28,3 +28,5 @@ export const get_stu_info='/student/'
 export const sub_update='/subject/update'
 
 export const sub_get_by_audit='/subject/get'
+
+export const upload_topic_excel='/upload/topic/excel'
