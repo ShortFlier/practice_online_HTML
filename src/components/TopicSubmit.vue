@@ -18,7 +18,8 @@
         </div>
       </div>
       <div class="warn">
-        请按照正确格式上传excel文档，否则将无法正确上传题目
+        请按照正确格式上传excel文档，否则将无法正确上传题目<br>
+        excel务必包含上列表头，以确保题目正确上传
       </div>
     </div>
     <div class="upload">
