@@ -6,33 +6,53 @@
           effect="light"
           content="点击刷新"
           placement="right">
-        <label>题库数量统计</label>
+        <label @click="fresh">题库数量统计</label>
       </el-tooltip>
     </div>
     <div class="total">
       <div style="color: gray">总题数</div>
-      <div style="color: #3099e8">{{ allInfo.total }}</div>
+      <div style="color: #3099e8">{{ allInfo.data[0].total}}</div>
     </div>
     <div class="tb">
       <el-table :data="allInfo.data" border style="width: 600px">
-        <el-table-column prop="date" label="单选题" width="120" />
-        <el-table-column prop="name" label="多选题" width="120" />
-        <el-table-column prop="address" label="判断题" width="120"/>
-        <el-table-column prop="address" label="填空题" width="120"/>
-        <el-table-column prop="address" label="应用题" width="120"/>
+        <el-table-column prop="rdsNumber" label="单选题" width="120" />
+        <el-table-column prop="mltNumber" label="多选题" width="120" />
+        <el-table-column prop="jdgeNumber" label="判断题" width="120"/>
+        <el-table-column prop="fitbNumber" label="填空题" width="120"/>
+        <el-table-column prop="vocaNumber" label="应用题" width="120"/>
       </el-table>
     </div>
   </div>
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
+import {topic_statistic} from "@/utils/api_path";
+import axios from "axios";
 
 const allInfo=reactive({
-  total:0,
   data:[{
-    date:100000000
+    total:0,
+    rdsNumber:0,
+    mltNumber:0,
+    jdgeNumber:0,
+    fitbNumber:0,
+    vocaNumber:0
   }]
+})
+function fresh(){
+  statistic()
+}
+//统计
+function statistic(){
+  axios.get(topic_statistic+'0').then(resolve=>{
+    if(resolve){
+      allInfo.data[0]=resolve.data
+    }
+  })
+}
+onMounted(()=>{
+  statistic();
 })
 </script>
 

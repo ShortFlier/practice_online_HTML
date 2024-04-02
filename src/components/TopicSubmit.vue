@@ -30,6 +30,12 @@
         </div>
       </div>
     </div>
+    <div>
+      <div style="text-align: center;color: #dcc351;font-size: 20px;padding-bottom: 10px">信息显示</div>
+      <div style="height: auto;padding: 10px;border: #999999 1px solid;color: #3099e8">
+        {{ allInfo.msg }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -95,7 +101,8 @@ const excelTip={
 }
 const allInfo=reactive({
   slt:0,
-  tip:excelTip.rds
+  tip:excelTip.rds,
+  msg:'等待消息'
 })
 // 上传文件
 //获取input框
@@ -111,6 +118,7 @@ function upload(event){
   const formData = new FormData();
   formData.append('file', file);
   formData.append('type', allInfo.slt+1);
+  allInfo.msg='等待消息'
 // 发送文件
   axios.post(upload_topic_excel,formData,{
     headers: {
@@ -118,7 +126,8 @@ function upload(event){
     }
   }).then(resolve=>{
     if(resolve){
-      commonTip('success',resolve.msg,1000)
+      commonTip('massage',resolve.msg,5000)
+      allInfo.msg=resolve.msg
     }
   })
 }

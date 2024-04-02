@@ -14,6 +14,7 @@ axios.interceptors.response.use(
             return response.data;
         else {
             commonTip('error',response.data.msg)
+            console.log(response.data.msg)
             return null;
         }
     }
