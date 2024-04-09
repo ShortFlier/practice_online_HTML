@@ -32,3 +32,9 @@ export const sub_get_by_audit='/subject/get'
 export const upload_topic_excel='/upload/topic/excel'
 
 export const topic_statistic='/topic/statistic/'
+
+export const sub_list='/subject/list'
+
+export const topic_audit='/topic/audit'
+
+export const topic_update='/topic/update'

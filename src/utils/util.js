@@ -11,3 +11,20 @@ export function connectPath(object){
     }
     return path
 }
+
+export function getType(str){
+    if (str=="全部题型")
+        return 0
+    else if(str=="单选题")
+        return 1
+    else if(str=="多选题")
+        return 2
+    else if(str=="判断题")
+        return 3
+    else if(str=="填空题")
+        return 4
+    else if(str=="应用题")
+        return 5
+    else
+        return -1
+}
