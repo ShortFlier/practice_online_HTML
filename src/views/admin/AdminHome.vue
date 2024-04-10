@@ -103,7 +103,6 @@ onMounted(()=>{
   background-color: #545d64;
   vertical-align: bottom;
   display: flex;
-
 }
 .item{
   text-align: center;

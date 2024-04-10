@@ -34,16 +34,24 @@ router.beforeEach((to, from, next)=>{
     else if(from.path.includes('admin/login')&&to.path.includes('admin')){
       if(store.state.identity=='admin')
         next()
-      else
+      else{
         router.replace('/admin/login')
+        console.log('管理员登入界面不允许前往管理员界面')
+      }
+
     }//管理员界面允许前往管理员界面，不允许前往其他界面
     else if(from.path.includes('admin')&&to.path.includes('admin')){
       next()
     }else{
-      if(store.state.identity&&store.state.account&&store.state.token)
+      if(to.path.includes(store.state.identity)&&store.state.account&&store.state.token)
         next()
-      else
+      else{
+        console.log('其他路由拦截')
+        console.log(from.path)
+        console.log(to.path)
+        console.log(store.state.identity)
         router.replace('/login')
+      }
     }
   }
 })

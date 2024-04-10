@@ -70,13 +70,13 @@ const subjectData=reactive({
   rows:[]
 })
 //分页确认
-const searchInfo={
+const searchInfo=reactive({
   key:null,
   pageInfo:{
     page:1,
     pageSize:5
   }
-}
+})
 function setPage(newPageInfo){
   searchInfo.pageInfo.page=newPageInfo.page
   searchInfo.pageInfo.pageSize=newPageInfo.pageSize

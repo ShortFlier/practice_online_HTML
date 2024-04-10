@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="fun">
-        <a style="float: left;font-size: 14px;color:white">没有账号？去注册</a>
+        <a style="float: left;font-size: 14px;color:white" @click="isShow=true;console.log(isShow)">没有账号？去注册</a>
         <a style="float: right;font-size: 14px;color:white">找回密码</a>
       </div>
       <div class="btn">
@@ -26,20 +26,31 @@
         <button style="float: right;margin-right: 100px" v-throttle:1000="thLogin">教师登入</button>
       </div>
     </div>
+    <Mask :isShow="isShow" @close="close">
+      <Register></Register>
+    </Mask>
   </div>
 </template>
 
 <script setup>
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {commonTip} from "@/utils/tip";
 import axios from "axios";
 import {stu_login, th_login} from "@/utils/api_path";
 import store from "@/store";
+import router from "@/router";
+import Mask from "@/components/Mask.vue";
+import Register from "@/views/public/Register.vue";
 
 const loginInfo=reactive({
   account:'',
   password:''
 })
+const isShow=ref(false)
+
+function close(){
+  isShow.value=false
+}
 
 function isNull(){
   return !(loginInfo.password&&loginInfo.account)
@@ -51,7 +62,6 @@ function stuLogin(){
   }else {
     axios.post(stu_login,loginInfo).then(response=>{
       if(response){
-        alert('登入成功！')
         store.state.identity='student'
         store.state.account=response.data.account
         store.state.token=response.msg
@@ -59,6 +69,7 @@ function stuLogin(){
         sessionStorage.setItem('account',store.state.account)
         sessionStorage.setItem('token',store.state.token)
         localStorage.setItem('account',loginInfo.account)
+        router.push('/student/home')
         }
     })
   }
@@ -70,7 +81,6 @@ function thLogin(){
   }else {
     axios.post(th_login,loginInfo).then(response=> {
       if (response){
-        alert('登入成功！')
         store.state.identity='teacher'
         store.state.account=response.data.account
         store.state.token=response.msg
@@ -78,6 +88,7 @@ function thLogin(){
         sessionStorage.setItem('account',store.state.account)
         sessionStorage.setItem('token',store.state.token)
         localStorage.setItem('account',loginInfo.account)
+        router.push('/teacher/home')
       }
     })
   }

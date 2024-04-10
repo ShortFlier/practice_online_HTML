@@ -11,6 +11,13 @@ import AuditAdm from "@/views/admin/AuditAdm.vue";
 import Else from "@/views/admin/Else.vue";
 import SubAudit from "@/views/admin/SubAudit.vue";
 import TopicAudit from "@/views/admin/TopicAudit.vue";
+import StuHome from "@/views/student/StuHome.vue";
+import TeacherHome from "@/views/teacher/TeacherHome.vue";
+import Personal from "@/views/public/Personal.vue";
+import Practice from "@/views/student/Practice.vue";
+import StuTest from "@/views/student/StuTest.vue";
+import StuGrade from "@/views/student/StuGrade.vue";
+import StuMyTeacher from "@/views/student/StuMyTeacher.vue";
 
 const routes = [
   {
@@ -25,6 +32,7 @@ const routes = [
     path: '/admin/login',
     component: adminLogin
   },
+    // 管理员路由
   {
     path: '/admin/home',
     component: AdminHome,
@@ -70,6 +78,44 @@ const routes = [
         component: Else
       }
     ]
+  },
+    // 学生路由
+  {
+    path: '/student/home',
+    component: StuHome,
+    redirect: '/student/home/personal',
+    children: [
+      {
+        path: 'personal',
+        component: Personal
+      },
+      {
+        path: 'practice',
+        component: Practice
+      },
+      {
+        path:'test',
+        component: StuTest
+      },
+      {
+        path: 'grade',
+        component: StuGrade
+      },
+      {
+        path:'myTeacher',
+        component: StuMyTeacher
+      }
+    ]
+  },
+    //教师路由
+  {
+    path: '/teacher/home',
+    component: TeacherHome,
+    redirect: '/teacher/home/personal',
+    children: [{
+      path: 'personal',
+      component: Personal
+    }]
   }
 ]
 

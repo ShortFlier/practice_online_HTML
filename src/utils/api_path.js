@@ -38,3 +38,7 @@ export const sub_list='/subject/list'
 export const topic_audit='/topic/audit'
 
 export const topic_update='/topic/update'
+
+export const stu_register='/student/register'
+
+export const th_register='/teacher/register'
