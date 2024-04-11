@@ -17,9 +17,10 @@
 <!--是否开启答题功能reply,true为开启,false显示答案-->
 <script setup>
 import {nextTick,ref, watch} from "vue";
+import {reply_test} from "@/utils/constant";
 const props=defineProps({
   topicInfo:Object,
-  reply:Boolean
+  reply:Number
 })
 //显示答案功能
 const t=ref(null)
@@ -27,7 +28,7 @@ const f=ref(null)
 //是否显示答案
 watch(()=>props.reply,()=>{
   nextTick(() => {
-    if (!props.reply) {
+    if (props.reply!=reply_test) {
       if(props.topicInfo.answer==1)
         t.value.classList.add('true')
       else
@@ -41,8 +42,8 @@ watch(()=>props.reply,()=>{
 let slt
 //选择
 function select(option){
-  // if(!props.reply)
-  //   return
+  if(props.reply!=reply_test)
+    return
   //去除已选择
   slt=option
   if(option){ //选择"正确"

@@ -23,9 +23,10 @@
 <!--是否开启答题功能reply,true为开启,false显示答案-->
 <script setup>
 import {nextTick, reactive, ref, watch} from "vue";
+import {reply_test} from "@/utils/constant";
 const props=defineProps({
   topicInfo:Object,
-  reply:Boolean
+  reply:Number
 })
 //显示答案功能
 const a=ref(null)
@@ -41,10 +42,15 @@ const options=reactive({
 //是否显示答案
 watch(()=>props.reply,()=>{
   nextTick(() => {
-    if (!props.reply) {
+    if (props.reply!=reply_test) {
       options[props.topicInfo.answer].classList.add('true')
     }
   });
+},{
+  immediate:true
+})
+watch(()=>props.topicInfo,()=>{
+  console.log('info: '+props.topicInfo)
 },{
   immediate:true
 })
@@ -52,7 +58,7 @@ watch(()=>props.reply,()=>{
 const slt=ref('')
 //选择
 function select(option){
-  if(!props.reply)
+  if(props.reply!=reply_test)
     return
   //去除已选择
   if(options[slt.value]){

@@ -10,7 +10,7 @@
         <el-rate v-model="allInfo.difficulty" :colors="colors" clearable size="large"/>
       </div>
       <div style="padding-top: 10px">
-        <el-radio-group v-model="allInfo.topicType" size="large">
+        <el-radio-group v-model="allInfo.topicType" size="large" :disabled="!allInfo.typeEnable">
           <el-radio-button label="全部题型"  />
           <el-radio-button label="单选题" />
           <el-radio-button label="多选题"  />
@@ -26,7 +26,7 @@
         <el-button type="primary" v-throttle:1000="getTopic">开始</el-button>
       </div>
       <div class="topic">
-        <JudgPct v-if="allInfo.topic" :topicInfo="allInfo.topic"></JudgPct>
+        <TopicNav :reply="allInfo.reply" :type="allInfo.type" :topicInfo="allInfo.topic"></TopicNav>
       </div>
     </div>
   </div>
@@ -35,19 +35,25 @@
 <script setup>
 import SubjectSelect from "@/components/SubjectSelect.vue";
 import {reactive} from "vue";
-import {connectPath, getType} from "@/utils/util";
+import {connectPath, getRandomInt, getType} from "@/utils/util";
 import axios from "axios";
 import {topic_practice} from "@/utils/api_path";
 import RadioPct from "@/components/topic/normal/RadioPct.vue";
 import MulChoicePct from "@/components/topic/normal/MulChoicePct.vue";
 import JudgPct from "@/components/topic/normal/JudgPct.vue";
+import FitbPct from "@/components/topic/normal/FitbPct.vue";
+import VocaPct from "@/components/topic/normal/VocaPct.vue";
+import {reply_test} from "@/utils/constant";
+import TopicNav from "@/components/topic/TopicNav.vue";
 const colors = ['#99A9BF', '#F7BA2A', '#FF9900']
 const allInfo=reactive({
   subjectId:'',
   difficulty:'',
   topicType:"全部题型",
   topic:null,
-  type:0
+  type:0,
+  typeEnable:true,
+  reply:reply_test
 })
 function getSubId(id){
   allInfo.subjectId=id
@@ -55,17 +61,23 @@ function getSubId(id){
 function getTopic(){
   if(!allInfo.subjectId)
     return
-  const type=getType(allInfo.topicType);
+  allInfo.topic=null
+  const type=getType(allInfo.topicType)?getType(allInfo.topicType):getRandomInt(1,5);
+  allInfo.type=type
+  // allInfo.typeEnable=false
   const path=connectPath({
     subjectId:allInfo.subjectId,
     difficulty:allInfo.difficulty,
-    type:type
+    type:allInfo.type
   })
   axios.get(topic_practice+`?${path}`).then(resolve=>{
     if(resolve){
       allInfo.type=type
       allInfo.topic=resolve.data
+      console.log(allInfo.topic)
     }
+  },reject=>{
+    allInfo.typeEnable=true
   })
 }
 </script>
