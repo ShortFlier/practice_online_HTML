@@ -26,7 +26,7 @@
         <el-button type="primary" v-throttle:1000="getTopic">开始</el-button>
       </div>
       <div class="topic">
-
+        <JudgPct v-if="allInfo.topic" :topicInfo="allInfo.topic"></JudgPct>
       </div>
     </div>
   </div>
@@ -38,6 +38,9 @@ import {reactive} from "vue";
 import {connectPath, getType} from "@/utils/util";
 import axios from "axios";
 import {topic_practice} from "@/utils/api_path";
+import RadioPct from "@/components/topic/normal/RadioPct.vue";
+import MulChoicePct from "@/components/topic/normal/MulChoicePct.vue";
+import JudgPct from "@/components/topic/normal/JudgPct.vue";
 const colors = ['#99A9BF', '#F7BA2A', '#FF9900']
 const allInfo=reactive({
   subjectId:'',
