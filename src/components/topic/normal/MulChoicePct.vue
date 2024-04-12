@@ -23,6 +23,12 @@
         <label>F</label>
         {{topicInfo.optionF}}</div>
     </div>
+    <div class="analyse_display" v-if="reply!=reply_test">
+      <div>解析</div>
+      <div class="analyse">
+        {{topicInfo.analyse}}
+      </div>
+    </div>
   </div>
 </template>
 <!--外部传入题目信息topicInfo-->
@@ -56,6 +62,11 @@ watch(()=>props.reply,()=>{
       const answerList=props.topicInfo.answer.split('')
       answerList.forEach(item=>{
         options[item].classList.add('true')
+      })
+    }else{
+      const answerList=props.topicInfo.answer.split('')
+      answerList.forEach(item=>{
+        options[item].classList.remove('true')
       })
     }
   });
@@ -117,5 +128,16 @@ function select(option){
 .selected{
   background-color: #dcc351;
   color: #3099e8;
+}
+.analyse_display{
+  margin: 10px 0;
+  background-color: #c5c4c4;
+  padding: 10px 0 0 5px;
+}
+.analyse{
+  background-color: white;
+  font-size: 20px;
+  border-bottom: #c5c4c4 1px solid;
+  padding: 10px 0;
 }
 </style>

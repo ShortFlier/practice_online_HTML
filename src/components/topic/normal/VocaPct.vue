@@ -10,6 +10,12 @@
         {{ item }}
       </div>
     </div>
+    <div class="analyse_display" v-if="reply!=reply_test">
+      <div>解析</div>
+      <div class="analyse">
+        {{topicInfo.analyse}}
+      </div>
+    </div>
     <div class="replyCon" v-if="props.reply!=reply_look">
       <div>你的回答</div>
       <div class="input" v-for="(item, index) in answerNumber" :key="uuidv4">
@@ -79,7 +85,7 @@ const myAnswer=reactive([])
 }
 .replyCon{
   margin: 10px 0;
-  background-color: #dcc351;
+  background-color: #f5e598;
   padding: 10px 0 0 5px;
 }
 .input{
@@ -91,5 +97,16 @@ const myAnswer=reactive([])
   font-weight: bolder;
   color: #a4bee0;
   float: left;
+}
+.analyse_display{
+  margin: 10px 0;
+  background-color: #c5c4c4;
+  padding: 10px 0 0 5px;
+}
+.analyse{
+  background-color: white;
+  font-size: 20px;
+  border-bottom: #c5c4c4 1px solid;
+  padding: 10px 0;
 }
 </style>
