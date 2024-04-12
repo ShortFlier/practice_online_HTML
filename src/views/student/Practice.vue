@@ -29,7 +29,7 @@
         <el-button v-if="!allInfo.typeEnable" type="primary" v-throttle:1000="over">结束</el-button>
       </div>
       <div class="topic">
-        <TopicNav :reply="allInfo.reply" :type="allInfo.type" :topicInfo="allInfo.topic"></TopicNav>
+        <TopicNav @getAnswer="getAnswer" :signal="allInfo.signal" :reply="allInfo.reply" :type="allInfo.type" :topicInfo="allInfo.topic"></TopicNav>
       </div>
     </div>
     <div class="bottom" >
@@ -50,7 +50,7 @@
         <el-rate  v-model="allInfo.assess" :colors="colors" clearable size="large"/>
       </div>
       <div v-if="allInfo.submit" v-throttle="next" style="float: right;color: white;font-size: 30px;background-color: #3099e8;cursor: pointer;padding-right: 10px;margin-right: 50px">
-        <i class="bi bi-dash-lg" style="position: relative;left: 5px"></i>
+        <i class="bi bi-dash-lg" style="position: relative;left: 7px"></i>
         <i class="bi bi-arrow-right"></i>
       </div>
     </div>
@@ -59,12 +59,14 @@
 
 <script setup>
 import SubjectSelect from "@/components/SubjectSelect.vue";
-import {reactive, watch} from "vue";
-import {connectPath, getRandomInt, getType} from "@/utils/util";
+import {nextTick, reactive, watch} from "vue";
+import {connectPath, getRandomInt, getType, isEmpty} from "@/utils/util";
 import axios from "axios";
-import {topic_practice} from "@/utils/api_path";
+import {practice_add, topic_practice, topic_update} from "@/utils/api_path";
 import {reply_all, reply_test} from "@/utils/constant";
 import TopicNav from "@/components/topic/TopicNav.vue";
+import {commonTip} from "@/utils/tip";
+import store from "@/store";
 const colors = ['#99A9BF', '#F7BA2A', '#FF9900']
 const allInfo=reactive({
   subjectId:'',
@@ -75,8 +77,10 @@ const allInfo=reactive({
   typeEnable:true,
   reply:reply_test,
   submit:false,
-  assess:0,
-  isAssess:false
+  assess:'',
+  isAssess:false,
+  signal:-1000,
+  answer:null
 })
 //获取选择的学科
 function getSubId(id){
@@ -84,8 +88,10 @@ function getSubId(id){
 }
 //向后端获取题目
 function getTopic(){
-  if(!allInfo.subjectId)
+  if(!allInfo.subjectId){
+    commonTip('warning','请选择学科',500)
     return
+  }
   allInfo.topic=null
   const type=getType(allInfo.topicType)?getType(allInfo.topicType):getRandomInt(1,5);
   allInfo.type=type
@@ -100,9 +106,10 @@ function getTopic(){
       allInfo.type=type
       allInfo.topic=resolve.data
       allInfo.assess=resolve.data.difficulty
-      console.log(allInfo.topic)
+      allInfo.submit=false
     }else
       allInfo.typeEnable=true
+      allInfo.reply=reply_test
   },reject=>{
     allInfo.typeEnable=true
   })
@@ -116,20 +123,52 @@ function over(){
 }
 //提交
 function submit(){
+  ++allInfo.signal
   //显示答案
   allInfo.reply=reply_all
   allInfo.submit=true
 }
 //用户难度评价,如果没有难度
-watch(()=>allInfo.assess,(newValue,oldValue)=>{
+watch(()=>allInfo.assess,()=>{
   if(allInfo.assess&allInfo.assess!=allInfo.topic.difficulty){
-    console.log('用户选择难度：'+allInfo.assess)
+    //更新难度
+    axios.put(topic_update,{
+      type:allInfo.type,
+      id:allInfo.topic.id,
+      difficulty:allInfo.assess
+    }).then(resolve=>{
+      if(resolve)
+        commonTip('success','感谢评价!',1000)
+    })
   }
 })
+//将题目发送后端
+function save(){
+  if(!isEmpty(allInfo.answer)){
+    const info={
+      type:allInfo.type,
+      topicId:allInfo.topic.id,
+      submitId:store.state.id,
+      submitAnswer:allInfo.answer,
+    }
+    console.log(info)
+    axios.post(practice_add,info)
+  }else {
+    allInfo.reply=reply_test
+    allInfo.submit=false
+    commonTip('warning','请作答!',1000)
+  }
+}
+//获取用户输入答案
+function getAnswer(input){
+  allInfo.answer=input
+  save()
+}
 //下一题
 function next(){
   allInfo.reply=reply_test
-  allInfo.submit=false
+  allInfo.topic=null
+  getTopic()
 }
 </script>
 

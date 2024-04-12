@@ -35,14 +35,25 @@
 </template>
 <!--外部传入题目信息topicInfo-->
 <!--是否开启答题功能reply,true为开启,false显示答案-->
+<!--外部获取用户填入答案信号sign，绑定事件getAnswer，传递单个参数的函数用于获取答案-->
 <script setup>
 import {answer_apart, reply_look, reply_test} from "@/utils/constant";
 import { v4 as uuidv4 } from 'uuid';
-import {computed, reactive} from "vue";
+import {computed, reactive, toRaw, watch} from "vue";
+import {connectAnswer} from "@/utils/util";
 
 const props=defineProps({
   topicInfo:Object,
-  reply:Number
+  reply:Number,
+  sign:Number
+})
+const emits=defineEmits(['getAnswer'])
+//抛出答案
+watch(()=>props.sign,()=>{
+  console.log(toRaw(myAnswer))
+  const answer=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
+  console.log(answer)
+  emits('getAnswer',answer)
 })
 //正确答案
 const answerList=computed(()=>{

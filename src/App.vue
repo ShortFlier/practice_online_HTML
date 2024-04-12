@@ -8,10 +8,11 @@ import store from "@/store";
 import router from "@/router";
 
 onMounted(()=>{
-  if(sessionStorage.getItem('identity')&&sessionStorage.getItem('account')&&sessionStorage.getItem('token')){
+  if(sessionStorage.getItem('identity')&&sessionStorage.getItem('account')&&sessionStorage.getItem('token')&&sessionStorage.getItem('id')){
     store.state.identity=sessionStorage.getItem('identity')
     store.state.account=sessionStorage.getItem('account')
     store.state.token=sessionStorage.getItem('token')
+    store.state.id=sessionStorage.getItem('id')
   }
 })
 
@@ -19,9 +20,10 @@ onMounted(()=>{
 router.beforeEach((to, from, next)=>{
   // 前往登入，放行
   if(to.path.includes('login')){
-    store.state.identity=''
-    store.state.account=''
-    store.state.token=''
+    store.state.identity=null
+    store.state.account=null
+    store.state.token=null
+    store.state.id=null
     next()
   }else {
     // 学生界面允许前往学生界面，不允许前往其他界面

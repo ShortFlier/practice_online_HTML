@@ -65,9 +65,11 @@ function stuLogin(){
         store.state.identity='student'
         store.state.account=response.data.account
         store.state.token=response.msg
+        store.state.id=response.data.stuId
         sessionStorage.setItem('identity',store.state.identity)
         sessionStorage.setItem('account',store.state.account)
         sessionStorage.setItem('token',store.state.token)
+        sessionStorage.setItem('id',store.state.id)
         localStorage.setItem('account',loginInfo.account)
         router.push('/student/home')
         }
@@ -84,9 +86,11 @@ function thLogin(){
         store.state.identity='teacher'
         store.state.account=response.data.account
         store.state.token=response.msg
+        store.state.id=response.data.thId
         sessionStorage.setItem('identity',store.state.identity)
         sessionStorage.setItem('account',store.state.account)
         sessionStorage.setItem('token',store.state.token)
+        sessionStorage.setItem('id',store.state.id)
         localStorage.setItem('account',loginInfo.account)
         router.push('/teacher/home')
       }

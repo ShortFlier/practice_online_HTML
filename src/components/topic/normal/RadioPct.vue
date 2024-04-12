@@ -27,12 +27,19 @@
 </template>
 <!--外部传入题目信息topicInfo-->
 <!--是否开启答题功能reply,true为开启,false显示答案-->
+<!--外部获取用户填入答案信号sign，绑定事件getAnswer，传递单个参数的函数用于获取答案-->
 <script setup>
 import {nextTick, reactive, ref, watch} from "vue";
 import {reply_test} from "@/utils/constant";
 const props=defineProps({
   topicInfo:Object,
-  reply:Number
+  reply:Number,
+  sign:Number
+})
+const emits=defineEmits(['getAnswer'])
+//抛出答案
+watch(()=>props.sign,()=>{
+  emits('getAnswer',slt.value)
 })
 //显示答案功能
 const a=ref(null)

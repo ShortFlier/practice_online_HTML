@@ -75,7 +75,7 @@ function regist(type){
           password:registInfo.password
         }).then(resolve=>{
           if(resolve){
-            save(identity_student,resolve.msg)
+            save(identity_student,resolve.msg,resolve.data.stuId)
           }
         })
       }
@@ -88,7 +88,7 @@ function regist(type){
           password:registInfo.password
         }).then(resolve=>{
           if(resolve){
-            save(identity_teacher,resolve.msg)
+            save(identity_teacher,resolve.msg,resolve.data.thId)
           }
         })
       }
@@ -96,14 +96,17 @@ function regist(type){
   }else
     console.log('none')
 }
-function save(type,token){
+function save(type,token,id){
   console.log(type)
+  console.log(id)
   store.state.identity=type
   store.state.account=registInfo.account
   store.state.token=token
+  store.state.id=id
   sessionStorage.setItem('identity',store.state.identity)
   sessionStorage.setItem('account',store.state.account)
   sessionStorage.setItem('token',store.state.token)
+  sessionStorage.setItem('id',store.state.id)
   localStorage.setItem('account',store.state.account)
   router.push(`/${store.state.identity}/home`)
 }

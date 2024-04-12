@@ -44,3 +44,5 @@ export const stu_register='/student/register'
 export const th_register='/teacher/register'
 
 export const topic_practice='/topic/practice'
+
+export const practice_add='/practice/add'
