@@ -105,6 +105,7 @@ function select(option){
   font-family: 华文宋体;
 }
 .qst{
+  white-space: pre-line;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;

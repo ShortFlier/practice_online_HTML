@@ -17,7 +17,7 @@
           {{item.question}}
         </div>
         <div class="operate">
-          <select style="width: 100px;height: 30px;font-size: 18px" @change="update($event,index)">
+          <select class="selectInput" style="padding: 5px;width: 100px;height: 30px;font-size: 18px;cursor: pointer" @change="update($event,index)">
             <option></option>
             <option v-for="item in allInfo.subject" :key="item.id" :value="item.id" >{{item.name}}</option>
           </select>
@@ -65,6 +65,8 @@ function getSubList(){
   })
 }
 function update(event,index){
+  if(!event.target.value)
+    return
   const info={
     type:null,
     id:null,
@@ -118,5 +120,9 @@ onMounted(()=>{
   line-height: 50px;
   width: 165px;
   text-align: center;
+}
+.selectInput>option{
+  padding: 5px;
+  font-size: 30px;
 }
 </style>

@@ -50,9 +50,7 @@ const props=defineProps({
 const emits=defineEmits(['getAnswer'])
 //抛出答案
 watch(()=>props.sign,()=>{
-  console.log(toRaw(myAnswer))
   const answer=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
-  console.log(answer)
   emits('getAnswer',answer)
 })
 //正确答案
@@ -71,6 +69,7 @@ const myAnswer=reactive([])
   font-family: 华文宋体;
 }
 .qst{
+  white-space: pre-line;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
