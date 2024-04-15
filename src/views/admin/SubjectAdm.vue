@@ -12,7 +12,7 @@
       <div class="tip">
         <label style="position: relative;right: 68px;font-weight: bold;color: #3099e8">相似学科：</label>
         <div v-for="item in addInfo.tipName" :key="item" style="color: #dcc351;font-weight: bold">
-          {{item}}
+          {{item.name}}
         </div>
       </div>
     </div>

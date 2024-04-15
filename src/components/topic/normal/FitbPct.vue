@@ -95,7 +95,7 @@ const myAnswer=reactive([])
 }
 .replyCon{
   margin: 10px 0;
-  background-color: #f5e598;
+  background-color: #f3e9b8;
   padding: 10px 0 0 5px;
 }
 .input{

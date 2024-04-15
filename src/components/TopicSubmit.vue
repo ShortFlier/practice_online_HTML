@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <SubjectLook></SubjectLook>
+    </div>
     <div class="nav">
       <div :class="allInfo.slt==0?'lab active':'lab'" @click="allInfo.slt=0;allInfo.tip=excelTip.rds">单选题</div>
       <div :class="allInfo.slt==1?'lab active':'lab'" @click="allInfo.slt=1;allInfo.tip=excelTip.mlc">多选题</div>
@@ -44,6 +47,7 @@ import {reactive, ref} from "vue";
 import axios from "axios";
 import {upload_topic_excel} from "@/utils/api_path";
 import {commonTip} from "@/utils/tip";
+import SubjectLook from "@/components/SubjectLook.vue";
 const tip=['单选题','多选题','判断题','填空题','应用题']
 const excelTip={
   turn:{
@@ -56,7 +60,8 @@ const excelTip={
     c:'选项C',
     d:'选项D',
     e:'选项E',
-    f:'选项F'
+    f:'选项F',
+    subId:'学科Id'
   },
   rds:{
     qst:'必填',
@@ -66,7 +71,8 @@ const excelTip={
     a:'',
     b:'',
     c:'',
-    d:'单选最多提供4个选项'
+    d:'单选最多提供4个选项',
+    subId:"（非必填）所属学科Id，请正确填写"
   },
   mlc:{
     qst:'必填',
@@ -78,25 +84,29 @@ const excelTip={
     c:'',
     d:'',
     e:'',
-    f:'多选最多提供6个选项'
+    f:'多选最多提供6个选项',
+    subId:"（非必填）所属学科Id，请正确填写"
   },
   jdg:{
     qst:'必填',
     aws:'必填,0错，1对',
     als:'非必填',
     dfc:'非必填,数字1-5表示',
+    subId:"（非必填）所属学科Id，请正确填写"
   },
   fitb:{
     qst:'必填',
     aws:'必填,每个答案以#answer#结尾',
     als:'非必填',
     dfc:'非必填,数字1-5表示',
+    subId:"（非必填）所属学科Id，请正确填写"
   },
   vca:{
     qst:'必填',
     aws:'必填,每个答案以#answer#结尾',
     als:'非必填',
     dfc:'非必填,数字1-5表示',
+    subId:"（非必填）所属学科Id，请正确填写"
   }
 }
 const allInfo=reactive({

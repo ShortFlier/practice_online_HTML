@@ -8,11 +8,12 @@ import store from "@/store";
 import router from "@/router";
 
 onMounted(()=>{
-  if(sessionStorage.getItem('identity')&&sessionStorage.getItem('account')&&sessionStorage.getItem('token')&&sessionStorage.getItem('id')){
+  if(sessionStorage.getItem('identity')&&sessionStorage.getItem('account')&&sessionStorage.getItem('token')){
     store.state.identity=sessionStorage.getItem('identity')
     store.state.account=sessionStorage.getItem('account')
     store.state.token=sessionStorage.getItem('token')
-    store.state.id=sessionStorage.getItem('id')
+    if(sessionStorage.getItem('id'))
+      store.state.id=sessionStorage.getItem('id')
   }
 })
 

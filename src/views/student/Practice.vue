@@ -144,7 +144,7 @@ watch(()=>allInfo.assess,()=>{
 })
 //将题目发送后端
 function save(){
-  if(!isEmpty(allInfo.answer)){
+  if(allInfo.answer==0|!isEmpty(allInfo.answer)){
     const info={
       type:allInfo.type,
       topicId:allInfo.topic.id,
