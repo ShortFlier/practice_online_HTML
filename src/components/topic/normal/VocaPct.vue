@@ -10,7 +10,7 @@
         {{ item }}
       </div>
     </div>
-    <div class="analyse_display" v-if="reply!=reply_test">
+    <div class="analyse_display" v-if="topicInfo.analyse!=null&&reply!=reply_test">
       <div>解析</div>
       <div class="analyse">
         {{topicInfo.analyse}}
@@ -69,7 +69,7 @@ const myAnswer=reactive([])
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre-line;
+  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;

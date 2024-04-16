@@ -46,3 +46,5 @@ export const th_register='/teacher/register'
 export const topic_practice='/topic/practice'
 
 export const practice_add='/practice/add'
+
+export const paper_search='/paper/gets'
