@@ -12,3 +12,10 @@ export const answer_apart='#answer#'
 export const reply_look=0
 export const reply_test=1
 export const reply_all=2
+
+export const wait=0;
+export const access=1;
+export const not_access=-1;
+
+export const display_false='0'
+export const display_true='1'

@@ -52,3 +52,7 @@ export const paper_search='/paper/gets'
 export const stu_paper_look='/paper/look/'
 
 export const paper_looks='/paper/looks/'
+
+export const subject_add='/subject/add'
+
+export const teacher_subject_get='subject/th/get'

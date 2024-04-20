@@ -32,6 +32,7 @@ import Page from "@/components/Page.vue";
 import {onMounted, reactive} from "vue";
 import axios from "axios";
 import {paper_search, sub_list} from "@/utils/api_path";
+import {display_true} from "@/utils/constant";
 
 const allInfo=reactive({
   total:0,
@@ -72,8 +73,9 @@ function get(){
   axios.post(paper_search,{
     pageInfo:allInfo.pageInfo,
     subjectId:allInfo.searchInfo.subjectId,
-    difficulty:allInfo.searchInfo.difficulty,
-    title:allInfo.searchInfo.title
+    difficulty:''+allInfo.searchInfo.difficulty,
+    title:allInfo.searchInfo.title,
+    display:display_true
   }).then(resolve=>{
     if(resolve){
       allInfo.total=resolve.data.total

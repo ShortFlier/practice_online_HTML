@@ -35,12 +35,13 @@ import Page from "@/components/Page.vue";
 import axios from "axios";
 import {paper_search} from "@/utils/api_path";
 import store from "@/store";
-import {identity_admin} from "@/utils/constant";
+import {display_true, identity_admin} from "@/utils/constant";
 const allInfo=reactive({
   searchInfo:{
     subjectId:'',
     difficulty:'',
-    title:''
+    title:'',
+    display:display_true
   },
   total:0,
   pageInfo:{
@@ -62,11 +63,13 @@ function dlt(){
 }
 //获取试卷信息
 function get(){
+  console.log(allInfo.searchInfo)
   axios.post(paper_search,{
     pageInfo:allInfo.pageInfo,
     subjectId:allInfo.searchInfo.subjectId,
-    difficulty:allInfo.searchInfo.difficulty,
-    title:allInfo.searchInfo.title
+    difficulty:''+allInfo.searchInfo.difficulty,
+    title:allInfo.searchInfo.title,
+    display:allInfo.searchInfo.display
   }).then(resolve=>{
     if(resolve){
       allInfo.total=resolve.data.total
