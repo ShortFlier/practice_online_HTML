@@ -1,5 +1,6 @@
 // 信息查询地址拼接
 import {answer_apart} from "@/utils/constant";
+import store from "@/store";
 
 export function connectPath(object){
     let path
@@ -77,4 +78,14 @@ export function connectAnswer(array,length){
         }
     }
     return answer
+}
+
+//简单登入验证
+export function isLogin(){
+    if(store.state.account&&store.state.token&&store.state.identity)
+        return store.state.identity
+    else{
+        console.log('NOT_LOGIN')
+        return false
+    }
 }

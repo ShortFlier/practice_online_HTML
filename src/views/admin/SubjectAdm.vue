@@ -4,10 +4,10 @@
     <el-button type="primary" circle style="position: relative; left: 10px" v-throttle:1000="getSubData">
       <i class="bi bi-search" style="font-size: 24px"></i>
     </el-button>
-    <el-button type="success" circle style="position: relative; left: 50px" v-throttle:1000="addSub">
+    <el-button v-if="store.state.identity==identity_admin" type="success" circle style="position: relative; left: 50px" v-throttle:1000="addSub">
       <i class="bi bi-plus-lg" style="font-size: 24px"></i>
     </el-button>
-    <div style="display: inline-block;position: relative;left: 90px" >
+    <div v-if="store.state.identity==identity_admin" style="display: inline-block;position: relative;left: 90px" >
       <input type="search" placeholder="输入学科名添加学科" @input="getLikeName" v-model.trim="addInfo.name" class="add"/>
       <div class="tip">
         <label style="position: relative;right: 68px;font-weight: bold;color: #3099e8">相似学科：</label>
@@ -23,7 +23,7 @@
       <el-table-column prop="createTime" label="创建时间" width="180" />
       <el-table-column prop="launcher" label="创建者" width="220" />
       <el-table-column prop="topicNumber" label="题目数" width="100" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="120" v-if="store.state.identity==identity_admin">
         <template v-slot="scope">
           <el-button link type="danger" size="small" @click="handleDle(scope.row)">
             删除
@@ -64,6 +64,8 @@ import {sub_update, subject_admin_add, subject_delete, subject_getData, subject_
 import {commonTip, confirmationBox} from "@/utils/tip";
 import Mask from "@/components/Mask.vue";
 import {connectPath} from "@/utils/util";
+import store from "@/store";
+import {identity_admin} from "@/utils/constant";
 // 学科数据
 const subjectData=reactive({
   total:0,

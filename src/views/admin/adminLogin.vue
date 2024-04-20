@@ -24,6 +24,7 @@ import axios from "axios";
 import {admin_login} from "@/utils/api_path";
 import router from "@/router";
 import store from "@/store";
+import {identity_admin} from "@/utils/constant";
 
 const loginInfo=reactive({
   account:'',
@@ -40,7 +41,7 @@ function login(){
   }else {
     axios.post(admin_login,loginInfo).then(response=>{
       if(response){
-        store.state.identity='admin'
+        store.state.identity=identity_admin
         store.state.account=response.data.account
         store.state.token=response.msg
         sessionStorage.setItem('identity',store.state.identity)

@@ -11,6 +11,10 @@
     <div class="contain">
       <div class="nav">
         <div :class="activeId==0?'item active':'item'" @click="goto(0)">个人中心</div>
+        <div :class="activeId==1?'item active':'item'" @click="goto(1)">学科信息</div>
+        <div :class="activeId==2?'item active':'item'" @click="goto(2)">题库信息</div>
+        <div :class="activeId==3?'item active':'item'" @click="goto(3)">试卷信息</div>
+        <div :class="activeId==4?'item active':'item'" @click="goto(4)">教师——学员</div>
       </div>
       <div>
         <router-view></router-view>
@@ -25,7 +29,7 @@ import router from "@/router";
 import {onMounted, ref} from "vue";
 
 const activeId=ref(0)
-const path=['/teacher/home/personal']
+const path=['/teacher/home/personal','/teacher/home/subject','/teacher/home/topic','/teacher/home/paper','/teacher/home/myStudent']
 function goto(index){
   activeId.value=index
   sessionStorage.setItem('teacher_home_active_id',activeId.value)

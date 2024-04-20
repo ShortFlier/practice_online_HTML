@@ -19,6 +19,7 @@ onMounted(()=>{
 
 // 全局路由守卫
 router.beforeEach((to, from, next)=>{
+  console.log(from.path+' [to] '+to.path)
   // 前往登入，放行
   if(to.path.includes('login')){
     store.state.identity=null
@@ -26,7 +27,9 @@ router.beforeEach((to, from, next)=>{
     store.state.token=null
     store.state.id=null
     next()
-  }else {
+  }else if(to.path.includes('paper')){ //前往查看试卷
+    next()
+  } else {
     // 学生界面允许前往学生界面，不允许前往其他界面
     if (from.path.includes('student')&&to.path.includes('student')) {
       next()

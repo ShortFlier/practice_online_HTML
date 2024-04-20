@@ -18,6 +18,12 @@ import Practice from "@/views/student/Practice.vue";
 import StuTest from "@/views/student/StuTest.vue";
 import StuGrade from "@/views/student/StuGrade.vue";
 import StuMyTeacher from "@/views/student/StuMyTeacher.vue";
+import PaperLook from "@/views/student/PaperLook.vue";
+import PaperLooks from "@/views/public/PaperLooks.vue";
+import TeacherSub from "@/views/teacher/TeacherSub.vue";
+import ThTopic from "@/views/teacher/ThTopic.vue";
+import ThPaper from "@/views/teacher/ThPaper.vue";
+import MyStudyTeam from "@/views/teacher/MyStudyTeam.vue";
 
 const routes = [
   {
@@ -115,8 +121,33 @@ const routes = [
     children: [{
       path: 'personal',
       component: Personal
-    }]
-  }
+    },
+      {
+        path: 'subject',
+        component: TeacherSub
+      },
+      {
+        path: 'topic',
+        component: ThTopic
+      },
+      {
+        path: 'paper',
+        component: ThPaper
+      },
+      {
+        path: 'myStudent',
+        component: MyStudyTeam
+      }]
+  },
+    // 试卷路由
+  { //学生查看试卷信息
+    path: '/paper/look/:id',
+    component: PaperLook
+  },
+  { //教师、管理员查看试卷信息
+    path: '/paper/looks/:id',
+    component: PaperLooks
+  },
 ]
 
 const router = createRouter({

@@ -11,8 +11,8 @@
       <el-table-column prop="difficulty" label="难度" width="70"/>
       <el-table-column  label="操作" width="200">
         <template v-slot="scope">
-          <el-button  type="success" size="small"  @click="look(scope.row.id)" >
-            查看
+          <el-button  type="success" size="small"   >
+            <router-link style="text-decoration: none;color: white" :to="'/paper/look/'+scope.row.id">查看</router-link>
           </el-button>
           <el-button  type="primary" size="small"  @click="test(scope.row.id)">
             开始考试
@@ -81,9 +81,7 @@ function get(){
     }
   })
 }
-function look(id){
-  alert('试卷id:'+id)
-}
+
 function test(id){
   alert('试卷id做:'+id)
 }

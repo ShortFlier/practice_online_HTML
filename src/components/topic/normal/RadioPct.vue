@@ -17,7 +17,7 @@
         <label>D</label>
         {{topicInfo.optionD}}</div>
     </div>
-    <div class="analyse_display" v-if="topicInfo.analyse!=null&&reply!=reply_test">
+    <div class="analyse_display" v-if="topicInfo.analyse!=null&&reply==reply_all">
       <div>解析</div>
       <div class="analyse">
         {{topicInfo.analyse}}
@@ -30,7 +30,7 @@
 <!--外部获取用户填入答案信号sign，绑定事件getAnswer，传递单个参数的函数用于获取答案-->
 <script setup>
 import {nextTick, reactive, ref, watch} from "vue";
-import {reply_test} from "@/utils/constant";
+import {reply_test,reply_all} from "@/utils/constant";
 const props=defineProps({
   topicInfo:Object,
   reply:Number,
@@ -55,11 +55,12 @@ const options=reactive({
 //是否显示答案
 watch(()=>props.reply,()=>{
   nextTick(() => {
-    if (props.reply!=reply_test) {
-      options[props.topicInfo.answer].classList.add('true')
-    }else {
-      options[props.topicInfo.answer].classList.remove('true')
-    }
+    if(props.reply==reply_all)
+      if (props.reply==reply_all) {
+        options[props.topicInfo.answer].classList.add('true')
+      }else {
+        options[props.topicInfo.answer].classList.remove('true')
+      }
   });
 },{
   immediate:true
@@ -95,6 +96,7 @@ function select(option){
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  word-wrap: break-word;
 }
 .option{
   cursor: pointer;
@@ -116,9 +118,11 @@ function select(option){
   background-color: #adeead;
   color: #3099e8;
   font-size: 20px;
+  border: 5px solid #adeead;
+  border-right: 10px solid #adeead;
 }
 .selected{
-  background-color: #dcc351;
+  background-color: #f3e9b8;
   color: #3099e8;
 }
 .analyse_display{

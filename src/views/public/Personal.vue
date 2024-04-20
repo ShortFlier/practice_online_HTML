@@ -1,31 +1,48 @@
 <template>
   <div class="display">
-    <div>
-      <div class="label">Id</div>
-      <div class="info">{{personal.id}}</div>
+    <div class="title">
+      基本信息
     </div>
-    <div>
-      <div class="label">账号</div>
-      <div class="info">{{personal.account}}</div>
-    </div>
-    <div>
-      <div class="label">昵称</div>
-      <div class="info">{{personal.name}}</div>
-    </div>
-    <div>
-      <div class="label">邮箱</div>
-      <div class="info">{{personal.email}}</div>
-    </div>
-    <div>
-      <div class="label">电话号码</div>
-      <div class="info">{{personal.phone}}</div>
-    </div>
-    <div>
-      <div class="label">创建日期</div>
-      <div class="info">{{personal.createTime}}</div>
+    <div class="info">
+      <el-descriptions  :column="2" border size="large">
+        <el-descriptions-item
+            label="昵称"
+            label-align="center"
+            align="center"
+        >
+          {{ personal.name }}
+        </el-descriptions-item>
+        <el-descriptions-item label="账号" label-align="center" align="center">
+          {{ personal.account }}
+        </el-descriptions-item>
+        <el-descriptions-item label="邮箱" label-align="center" align="center">
+          {{ personal.email }}
+        </el-descriptions-item>
+        <el-descriptions-item label="电话号码" label-align="center" align="center">
+          {{personal.phone}}
+        </el-descriptions-item>
+        <el-descriptions-item label="注册时间" label-align="center" align="center">
+          {{personal.createTime}}
+        </el-descriptions-item>
+      </el-descriptions>
     </div>
   </div>
   <div class="border">
+    <div class="info_amend">
+      <el-tooltip
+          class="box-item"
+          effect="light"
+          content="信息修改"
+          placement="bottom"
+      >
+        <el-button type="success" circle >
+          <i class="bi bi-pencil-square" style="font-size: 18px"></i>
+        </el-button>
+      </el-tooltip>
+    </div>
+    <div class="psd">
+      <el-link type="primary">修改密码</el-link>
+    </div>
   </div>
 </template>
 
@@ -69,46 +86,24 @@ onMounted(()=>{
 
 <style scoped>
 .display{
-  margin: 50px 0 0 50px;
-  width: 500px;
-  border: #c5c4c4 solid 1px;
-  padding: 25px 5px;
-  cursor: pointer;
+  width: 90%;
+  padding: 20px;
 }
-.display>div{
-  overflow: hidden;
-  height: 50px;
-  padding: 5px 0;
-}
-.label{
-  float: left;
-  width: 100px;
-  height: 20px;
-  text-align: right;
-  color: #666666;
-  position: relative;
-  top:20px;
-  padding-right: 10px;
+.title{
+  text-align: center;
+  margin: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #545d64;
 }
 .info{
-  width: 350px;
-  padding-left: 20px;
-  height: 40px;
-  line-height: 40px;
-  float: left;
-  color: #3099e8;
-  font-size: 28px;
-  border-bottom: #c2d7f5 2px solid;
-}
-.border{
-  margin: 0 0 0 50px;
-  float: left;
-  width: 100px;
-  height: 100px;
-  position: relative;
-  bottom: 412px;
-  border-top: 5px solid #dcc351;
-  border-left: 5px solid #dcc351;
   cursor: pointer;
+}
+.info_amend{
+  margin-left: 550px;
+}
+.psd{
+  margin-top: 100px;
+  margin-left: 550px;
 }
 </style>

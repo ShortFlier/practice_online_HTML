@@ -48,3 +48,7 @@ export const topic_practice='/topic/practice'
 export const practice_add='/practice/add'
 
 export const paper_search='/paper/gets'
+
+export const stu_paper_look='/paper/look/'
+
+export const paper_looks='/paper/looks/'
