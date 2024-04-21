@@ -89,3 +89,8 @@ export function isLogin(){
         return false
     }
 }
+
+//字符串排序
+export function sortString(str) {
+    return str.split('').sort().join('');
+}

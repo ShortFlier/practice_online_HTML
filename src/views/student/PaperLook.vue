@@ -107,8 +107,8 @@ const allInfo=reactive({
 })
 
 onMounted(()=>{
-  if(!isLogin())
-    router.push('/login')
+  // if(!isLogin())
+  //   router.push('/login')
   const id=useRoute().params.id
   axios.get(stu_paper_look+id).then(resolve=>{
     if (resolve){

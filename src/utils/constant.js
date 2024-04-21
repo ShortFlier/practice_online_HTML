@@ -19,3 +19,9 @@ export const not_access=-1;
 
 export const display_false='0'
 export const display_true='1'
+
+export const test_type_test=0 //只能回答
+
+export const test_type_look=1 //只能看已经回答的
+
+export const test_type_all=2 //能看到回答和正确答案、解析
