@@ -47,7 +47,7 @@ const props=defineProps({
 const emits=defineEmits(['getAnswer'])
 //抛出答案
 watch(()=>props.sign,()=>{
-  answerReply.reply=sortString(answerReply.reply)
+  answerReply.submitAnswer=sortString(answerReply.submitAnswer)
   emits('getAnswer',toRaw(answerReply))
 })
 //显示答案功能
@@ -81,8 +81,8 @@ watch(()=>props.testType,()=>{
 //答题功能
 const answerReply=reactive({
   type:multiple_choices,
-  id:props.topicInfo.id,
-  reply:''
+  topicId:props.topicInfo.id,
+  submitAnswer:'',
 })
 const slt=ref('')
 //选择
@@ -90,12 +90,12 @@ function select(option){
   if(props.testType!=test_type_test)
     return
   //取消选择
-  if(answerReply.reply.includes(option)){
-    answerReply.reply=answerReply.reply.replace(option,'')
+  if(answerReply.submitAnswer.includes(option)){
+    answerReply.submitAnswer=answerReply.submitAnswer.replace(option,'')
     slt.value=''
     options[option].classList.remove('selected')
   }else {
-    answerReply.reply=answerReply.reply+option
+    answerReply.submitAnswer=answerReply.submitAnswer+option
     slt.value=option
     options[option].classList.add('selected')
   }
@@ -120,12 +120,12 @@ onMounted(()=>{
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .option{

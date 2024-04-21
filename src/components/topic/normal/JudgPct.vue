@@ -41,7 +41,7 @@ const f=ref(null)
 //是否显示答案
 watch(()=>props.reply,()=>{
   nextTick(() => {
-    if (props.reply!=reply_test) {
+    if (props.reply==reply_all) {
       if(props.topicInfo.answer==1)
         t.value.classList.add('true')
       else
@@ -77,12 +77,12 @@ function select(option){
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .slt{

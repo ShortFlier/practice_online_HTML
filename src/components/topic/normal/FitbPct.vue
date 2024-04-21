@@ -22,7 +22,7 @@
         <div class="lbl">空{{ index + 1 }}</div>
         <div>
           <el-input
-              v-model.trim="myAnswer[index]"
+              v-model="myAnswer[index]"
               style="width: 90%;font-size:20px;font-family: 微软雅黑"
               :autosize="{ minRows: 1, maxRows: 3 }"
               type="textarea"
@@ -73,12 +73,12 @@ const myAnswer=reactive([])
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .answer_display{

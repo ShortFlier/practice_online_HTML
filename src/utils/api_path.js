@@ -56,3 +56,7 @@ export const paper_looks='/paper/looks/'
 export const subject_add='/subject/add'
 
 export const teacher_subject_get='subject/th/get'
+
+export const stu_test='/paper/test/'
+
+export const stu_test_submit='/paper/test/submit'

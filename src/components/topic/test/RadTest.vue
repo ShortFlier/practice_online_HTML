@@ -65,25 +65,25 @@ watch(()=>props.testType,()=>{
 //答题功能
 const answerReply=reactive({
   type:radioes,
-  id:props.topicInfo.id,
-  reply:''
+  topicId:props.topicInfo.id,
+  submitAnswer:''
 })
 //选择
 function select(option){
   if(props.testType!=test_type_test)
     return
   //去除已选择
-  if(options[answerReply.reply]){
-    options[answerReply.reply].classList.remove('selected')
+  if(options[answerReply.submitAnswer]){
+    options[answerReply.submitAnswer].classList.remove('selected')
   }
-  answerReply.reply=option
+  answerReply.submitAnswer=option
   options[option].classList.add('selected')
 }
 //显示用户的回答
 function view(){
   if(props.testType==test_type_look||props.testType==test_type_all)
     if(options[props.theReply]){
-      options[answerReply.reply].classList.remove('selected')
+      options[answerReply.submitAnswer].classList.remove('selected')
     }
 }
 onMounted(()=>{
@@ -96,12 +96,12 @@ onMounted(()=>{
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .option{

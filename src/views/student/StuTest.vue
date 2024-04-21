@@ -14,8 +14,8 @@
           <el-button  type="success" size="small"   >
             <router-link style="text-decoration: none;color: white" :to="'/paper/look/'+scope.row.id">查看</router-link>
           </el-button>
-          <el-button  type="primary" size="small"  @click="test(scope.row.id)">
-            开始考试
+          <el-button  type="primary" size="small"  >
+            <router-link style="text-decoration: none;color: white" :to="'/paper/test/'+scope.row.id">开始考试</router-link>
           </el-button>
         </template>
       </el-table-column>
@@ -84,9 +84,6 @@ function get(){
   })
 }
 
-function test(id){
-  alert('试卷id做:'+id)
-}
 onMounted(()=>{
   get()
   getSubs()

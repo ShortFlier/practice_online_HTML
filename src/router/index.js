@@ -24,6 +24,7 @@ import TeacherSub from "@/views/teacher/TeacherSub.vue";
 import ThTopic from "@/views/teacher/ThTopic.vue";
 import ThPaper from "@/views/teacher/ThPaper.vue";
 import MyStudyTeam from "@/views/teacher/MyStudyTeam.vue";
+import PaperTest from "@/views/student/PaperTest.vue";
 
 const routes = [
   {
@@ -148,6 +149,10 @@ const routes = [
     path: '/paper/looks/:id',
     component: PaperLooks
   },
+  { //学生考试功能
+    path: '/paper/test/:id',
+    component: PaperTest
+  }
 ]
 
 const router = createRouter({

@@ -22,7 +22,7 @@
         <div class="lbl">问题{{ index + 1 }}</div>
         <div>
           <el-input
-              v-model.trim="myAnswer[index]"
+              v-model="myAnswer[index]"
               style="width: 90%;font-size:20px;font-family: 微软雅黑"
               :autosize="{ minRows: 2, maxRows: 6 }"
               type="textarea"
@@ -78,7 +78,7 @@ const myAnswer=reactive([])
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
-  white-space: pre;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .answer_display{

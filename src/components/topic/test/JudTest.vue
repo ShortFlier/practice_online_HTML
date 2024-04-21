@@ -55,15 +55,15 @@ watch(()=>props.testType,()=>{
 //答题功能
 const answerReply=reactive({
   type:judgment,
-  id:props.topicInfo.id,
-  reply:''
+  topicId:props.topicInfo.id,
+  submitAnswer:''
 })
 //选择
 function select(option){
   if(props.testType!=test_type_test)
     return
   //去除已选择
-  answerReply.reply=option
+  answerReply.submitAnswer=option
   if(option){ //选择"正确"
     t.value.classList.add('selected')
     f.value.classList.remove('selected')
@@ -92,12 +92,12 @@ onMounted(()=>{
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .slt{

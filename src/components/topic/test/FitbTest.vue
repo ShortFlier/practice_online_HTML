@@ -22,7 +22,7 @@
         <div class="lbl">空{{ index + 1 }}</div>
         <div>
           <el-input
-              v-model.trim="myAnswer[index]"
+              v-model="myAnswer[index]"
               style="width: 90%;font-size:20px;font-family: 微软雅黑"
               :autosize="{ minRows: 1, maxRows: 3 }"
               type="textarea"
@@ -58,7 +58,7 @@ const props=defineProps({
 const emits=defineEmits(['getAnswer'])
 //抛出答案
 watch(()=>props.sign,()=>{
-  answerReply.reply=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
+  answerReply.submitAnswer=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
   emits('getAnswer',toRaw(answerReply))
 })
 //题目的正确答案，数组
@@ -77,8 +77,8 @@ const myAnswer=reactive([])
 //答题功能
 const answerReply=reactive({
   type:fill_in_the_blank,
-  id:props.topicInfo.id,
-  reply:''
+  topicId:props.topicInfo.id,
+  submitAnswer:''
 })
 //显示用户的回答
 function view(){
@@ -100,12 +100,12 @@ onMounted(()=>{
   font-family: 华文宋体;
 }
 .qst{
-  white-space: pre;
   padding: 10px;
   border: #d5d2d2 1px solid;
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .answer_display{

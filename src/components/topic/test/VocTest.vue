@@ -22,7 +22,7 @@
         <div class="lbl">问题{{ index + 1 }}</div>
         <div>
           <el-input
-              v-model.trim="myAnswer[index]"
+              v-model="myAnswer[index]"
               style="width: 90%;font-size:20px;font-family: 微软雅黑"
               :autosize="{ minRows: 2, maxRows: 6 }"
               type="textarea"
@@ -58,7 +58,7 @@ const props=defineProps({
 const emits=defineEmits(['getAnswer'])
 //抛出答案
 watch(()=>props.sign,()=>{
-  answerReply.reply=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
+  answerReply.submitAnswer=connectAnswer(toRaw(myAnswer),answerNumber.value.length)
   emits('getAnswer',toRaw(answerReply))
 })
 //正确答案
@@ -76,8 +76,8 @@ const myAnswer=reactive([])
 //答题功能
 const answerReply=reactive({
   type:vocabulary_qst,
-  id:props.topicInfo.id,
-  reply:''
+  topicId:props.topicInfo.id,
+  submitAnswer:''
 })
 //显示用户的回答
 function view(){
@@ -104,7 +104,7 @@ onMounted(()=>{
   color: #0374cb;
   font-size: 24px;
   border-bottom: none;
-  white-space: pre;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 .answer_display{
