@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grade" v-if="testType!=test_type_test">
-      {{topicInfo.grade?'得分：'+topicInfo.grade:'待批阅'}}
+      {{topicInfo.grade!=null&&topicInfo.grade>=0?'得分：'+topicInfo.grade:'待批阅'}}
     </div>
     <div class="qst">
       <label>{{topicInfo.question}}</label>
