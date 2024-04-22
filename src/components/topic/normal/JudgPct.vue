@@ -42,7 +42,7 @@ const f=ref(null)
 watch(()=>props.reply,()=>{
   nextTick(() => {
     if (props.reply==reply_all) {
-      if(props.topicInfo.answer==1)
+      if(props.topicInfo.answer=='1')
         t.value.classList.add('true')
       else
         f.value.classList.add('true')

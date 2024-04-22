@@ -43,7 +43,7 @@ const f=ref(null)
 watch(()=>props.testType,()=>{
   nextTick(() => {
     if (props.testType==test_type_all) {
-      if(props.topicInfo.answer==1)
+      if(props.topicInfo.answer=='1')
         t.value.classList.add('true')
       else
         f.value.classList.add('true')
