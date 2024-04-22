@@ -60,3 +60,7 @@ export const teacher_subject_get='subject/th/get'
 export const stu_test='/paper/test/'
 
 export const stu_test_submit='/paper/test/submit'
+
+export const stu_test_history='/test/history'
+
+export const stu_test_look='/test/look/'

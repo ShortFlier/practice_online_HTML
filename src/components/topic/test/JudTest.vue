@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="grade" v-if="testType!=test_type_test">
+      {{topicInfo.grade?'得分：'+topicInfo.grade:'待批阅'}}
+    </div>
     <div class="qst">
       <label>{{topicInfo.question}}</label>
     </div>
@@ -28,8 +31,7 @@ import {judgment, test_type_all, test_type_look, test_type_test} from "@/utils/c
 const props=defineProps({
   topicInfo:Object,
   testType:Number,
-  sign:Number,
-  theReply:String  //用户已回答答案
+  sign:Number
 })
 const emits=defineEmits(['getAnswer'])
 //抛出答案
@@ -75,8 +77,8 @@ function select(option){
 //显示用户的回答
 function view(){
   if(props.testType==test_type_look||props.testType==test_type_all)
-    if(props.theReply)
-      if(props.theReply){ //选择"正确"
+    if(props.topicInfo.submitAnswer)
+      if(props.topicInfo.submitAnswer){ //选择"正确"
         t.value.classList.add('selected')
       }else {
         f.value.classList.add('selected')
@@ -139,5 +141,15 @@ onMounted(()=>{
   font-size: 20px;
   border-bottom: #c5c4c4 1px solid;
   padding: 10px 0;
+}
+.grade{
+  float: right;
+  border: 3px solid #DD302D;
+  padding: 5px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #DD302D;
+  transform: rotate(45deg);
 }
 </style>

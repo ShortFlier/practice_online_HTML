@@ -25,6 +25,9 @@ import ThTopic from "@/views/teacher/ThTopic.vue";
 import ThPaper from "@/views/teacher/ThPaper.vue";
 import MyStudyTeam from "@/views/teacher/MyStudyTeam.vue";
 import PaperTest from "@/views/student/PaperTest.vue";
+import TestHistory from "@/views/student/TestHistory.vue";
+import TestOnline from "@/views/student/TestOnline.vue";
+import TestLook from "@/views/student/TestLook.vue";
 
 const routes = [
   {
@@ -102,7 +105,18 @@ const routes = [
       },
       {
         path:'test',
-        component: StuTest
+        component: TestOnline,
+        redirect:'/student/home/test/do',
+        children:[
+          {
+            path:'do',
+            component: StuTest
+          },
+          {
+            path:'his',
+            component: TestHistory
+          }
+        ]
       },
       {
         path: 'grade',
@@ -152,6 +166,10 @@ const routes = [
   { //学生考试功能
     path: '/paper/test/:id',
     component: PaperTest
+  },
+  { //学生考试查看
+    path: '/paper/test/look/:id',
+    component: TestLook
   }
 ]
 

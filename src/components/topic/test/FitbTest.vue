@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div :class="topicInfo.grade?'grade':'grade_none'" v-if="testType!=test_type_test">
+      {{topicInfo.grade?'得分：'+topicInfo.grade:'待批阅'}}
+    </div>
     <div class="qst">
       <label>{{topicInfo.question}}</label>
     </div>
@@ -52,8 +55,7 @@ import {connectAnswer} from "@/utils/util";
 const props=defineProps({
   topicInfo:Object,
   testType:Number,
-  sign:Number,
-  theReply:String  //用户已回答答案
+  sign:Number
 })
 const emits=defineEmits(['getAnswer'])
 //抛出答案
@@ -83,8 +85,8 @@ const answerReply=reactive({
 //显示用户的回答
 function view(){
   if(props.testType==test_type_look||props.testType==test_type_all)
-    if(props.theReply){
-      const answerArray=props.theReply.split(answer_apart)
+    if(props.topicInfo.submitAnswer){
+      const answerArray=props.topicInfo.submitAnswer.split(answer_apart)
       answerNumber.value.forEach((item,index)=>{
         myAnswer[index]=answerArray[index]
       })
@@ -150,5 +152,25 @@ onMounted(()=>{
   font-size: 20px;
   border-bottom: #c5c4c4 1px solid;
   padding: 10px 0;
+}
+.grade{
+  float: right;
+  border: 3px solid #DD302D;
+  padding: 5px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #DD302D;
+  transform: rotate(45deg);
+}
+.grade_none{
+  float: right;
+  border: 3px solid #545d64;
+  padding: 5px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #545d64;
+  transform: rotate(45deg);
 }
 </style>
