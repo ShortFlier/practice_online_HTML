@@ -3,6 +3,13 @@
     <div>
       <PaperTitle :paper="allInfo.paperInfo.paper"></PaperTitle>
     </div>
+    <div class="my_grade">
+      总得分：<label style="font-size: 44px">{{allInfo.testInfo.grade}}</label>
+    </div>
+    <div class="cdt">
+      <label>考生信息：</label>
+      <label class="zcdt">{{allInfo.testInfo.account+' —— '+allInfo.testInfo.name}}</label>
+    </div>
     <div class="display">
       <div v-if="allInfo.paperInfo.radioMarks" class="topic_blank">
         <div class="title_t">单选题（
@@ -10,7 +17,7 @@
           ）分</div>
         <div class="topic" v-for="(item,index) in allInfo.paperInfo.radioList" :key="index">
           <RadTest :topicInfo="item" :testType="allInfo.testType" :sign="allInfo.sign"
-                   @getAnswer="setAnswer"></RadTest>
+                   ></RadTest>
         </div>
       </div>
       <div v-if="allInfo.paperInfo.mulMarks" class="topic_blank">
@@ -19,7 +26,7 @@
           ）分</div>
         <div class="topic" v-for="(item,index) in allInfo.paperInfo.mulList" :key="index">
           <MulTest :topicInfo="item" :testType="allInfo.testType" :sign="allInfo.sign"
-                   @getAnswer="setAnswer"></MulTest>
+                   ></MulTest>
         </div>
       </div>
       <div v-if="allInfo.paperInfo.judgMarks" class="topic_blank">
@@ -28,7 +35,7 @@
           ）分</div>
         <div class="topic" v-for="(item,index) in allInfo.paperInfo.judgList" :key="index">
           <JudTest :topicInfo="item" :testType="allInfo.testType" :sign="allInfo.sign"
-                   @getAnswer="setAnswer"></JudTest>
+                   ></JudTest>
         </div>
       </div>
       <div v-if="allInfo.paperInfo.fitbMarks" class="topic_blank">
@@ -37,7 +44,7 @@
           ）分</div>
         <div class="topic" v-for="(item,index) in allInfo.paperInfo.fitbList" :key="index">
           <FitbTest :topicInfo="item" :testType="allInfo.testType" :sign="allInfo.sign"
-                    @getAnswer="setAnswer"></FitbTest>
+                    ></FitbTest>
         </div>
       </div>
       <div v-if="allInfo.paperInfo.vocMarks" class="topic_blank">
@@ -46,7 +53,7 @@
           ）分</div>
         <div class="topic" v-for="(item,index) in allInfo.paperInfo.vocList" :key="index">
           <VocTest :topicInfo="item" :testType="allInfo.testType" :sign="allInfo.sign"
-                   @getAnswer="setAnswer"></VocTest>
+                   ></VocTest>
         </div>
       </div>
     </div>
@@ -66,7 +73,7 @@ import JudTest from "@/components/topic/test/JudTest.vue";
 import FitbTest from "@/components/topic/test/FitbTest.vue";
 import VocTest from "@/components/topic/test/VocTest.vue";
 import axios from "axios";
-import {stu_test_look} from "@/utils/api_path";
+import {stu_test_history, stu_test_look} from "@/utils/api_path";
 const allInfo=reactive({
   paperInfo:{
     paper:null,
@@ -84,7 +91,12 @@ const allInfo=reactive({
   },
   testType:test_type_look,
   id:'',
-  sign:1
+  sign:1,
+  testInfo:{
+    grade:'',
+    account:'',
+    name:''
+  }
 })
 
 onMounted(()=>{
@@ -109,6 +121,11 @@ onMounted(()=>{
           });
         }
       }
+    }
+  })
+  axios.get(stu_test_history+'?testId='+allInfo.id).then(resolve=>{
+    if(resolve){
+      allInfo.testInfo=resolve.data[0]
     }
   })
 })
@@ -158,5 +175,25 @@ onMounted(()=>{
 }
 .time{
   font-size: 20px;
+}
+.cdt{
+  width: 1200px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.zcdt{
+  color: #3099e8;
+  font-size: 20px;
+}
+.my_grade{
+  float: left;
+  color: #DD302D;
+  font-weight: bolder;
+  position: relative;
+  left: 200px;
+  bottom: 100px;
 }
 </style>

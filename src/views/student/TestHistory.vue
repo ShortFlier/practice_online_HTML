@@ -3,10 +3,11 @@
     <SubjectSelect @sltChange="setSubId"></SubjectSelect>
   </div>
   <div class="table">
-    <el-table :data="allInfo.tableData" border stripe style="width: 800px">
+    <el-table :data="allInfo.tableData" border stripe style="width: 930px">
       <el-table-column prop="title" label="试卷名" width="220" />
       <el-table-column prop="subjectName" label="学科" width="220" />
       <el-table-column prop="createTime" label="考试时间"  width="180"/>
+      <el-table-column prop="totalMarks" label="试卷总分" width="130"/>
       <el-table-column prop="grade" label="得分" width="90"/>
       <el-table-column  label="查看"  width="90">
         <template v-slot="scope">

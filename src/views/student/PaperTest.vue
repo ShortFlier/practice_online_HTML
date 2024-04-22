@@ -3,6 +3,10 @@
     <div>
       <PaperTitle :paper="allInfo.paperInfo.paper"></PaperTitle>
     </div>
+    <div class="cdt">
+      <label>考生信息：</label>
+      <label class="zcdt">{{store.state.account}}</label>
+    </div>
     <div class="display">
       <div v-if="allInfo.paperInfo.radioMarks" class="topic_blank">
         <div class="title_t">单选题（
@@ -234,6 +238,18 @@ onMounted(()=>{
   background-color: #DD302D;
 }
 .time{
+  font-size: 20px;
+}
+.cdt{
+  width: 1200px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.zcdt{
+  color: #3099e8;
   font-size: 20px;
 }
 </style>
