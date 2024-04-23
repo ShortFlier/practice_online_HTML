@@ -64,3 +64,5 @@ export const stu_test_submit='/paper/test/submit'
 export const stu_test_history='/test/history'
 
 export const stu_test_look='/test/look/'
+
+export const test_random='/test/random'
