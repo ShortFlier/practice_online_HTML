@@ -66,17 +66,17 @@ const options=reactive({
 watch(()=>props.reply,()=>{
   nextTick(() => {
     if(props.reply==reply_all)
-      if (props.reply==reply_test) {
+      if (props.reply==reply_all) {
         const answerList=props.topicInfo.answer.split('')
         answerList.forEach(item=>{
           options[item].classList.add('true')
         })
-      }else{
-        const answerList=props.topicInfo.answer.split('')
-        answerList.forEach(item=>{
-          options[item].classList.remove('true')
-        })
-      }
+        }else{
+          const answerList=props.topicInfo.answer.split('')
+          answerList.forEach(item=>{
+            options[item].classList.remove('true')
+          })
+        }
   });
 },{
   immediate:true

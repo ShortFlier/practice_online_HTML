@@ -3,7 +3,6 @@
     <div style="color: #DD302D;text-align: center">给题目选定一个合适的学科以完成审核</div>
     <div style="padding: 10px">
       <el-radio-group v-model="allInfo.slt" size="large">
-        <el-radio-button label="全部题型"  />
         <el-radio-button label="单选题" />
         <el-radio-button label="多选题"  />
         <el-radio-button label="判断题"  />
@@ -39,7 +38,7 @@ import {connectPath, getType} from "@/utils/util";
 import {commonTip} from "@/utils/tip";
 
 const allInfo=reactive({
-  slt:"全部题型",
+  slt:"单选题",
   total:0,
   pageInfo:{
     page:1,

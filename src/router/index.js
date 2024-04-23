@@ -28,6 +28,7 @@ import PaperTest from "@/views/student/PaperTest.vue";
 import TestHistory from "@/views/student/TestHistory.vue";
 import TestOnline from "@/views/student/TestOnline.vue";
 import TestLook from "@/views/student/TestLook.vue";
+import PaperRelease from "@/views/teacher/PaperRelease.vue";
 
 const routes = [
   {
@@ -148,6 +149,10 @@ const routes = [
       {
         path: 'paper',
         component: ThPaper
+      },
+      {
+        path: 'release',
+        component: PaperRelease
       },
       {
         path: 'myStudent',
