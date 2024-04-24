@@ -65,4 +65,4 @@ export const stu_test_history='/test/history'
 
 export const stu_test_look='/test/look/'
 
-export const test_random='/test/random'
+export const test_random='/paper/random'

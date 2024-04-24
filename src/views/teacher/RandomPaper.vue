@@ -22,7 +22,7 @@
         <el-form-item :label="item" >
           <el-input-number min="0" controls-position="right" v-model="allInfo.topicNumbers[index]" style="width: 100px"/>
           <label class="lbl">每题分数：</label>
-          <el-input-number min="0" controls-position="right" v-model="allInfo.topicMarks[index]" style="width: 100px"/>
+          <el-input-number min="1" controls-position="right" v-model="allInfo.topicMarks[index]" style="width: 100px"/>
         </el-form-item>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <SubjectSelect @sltChange="setSubjectId"></SubjectSelect>
       </div>
       <div class="slt">
-        <label>最低难度选择：</label>
+        <label>难度选择：</label>
         <el-rate v-model="allInfo.difficulty" />
       </div>
       <div class="slt">
@@ -94,7 +94,10 @@ function get(){
     description:allInfo.description,
     duration:allInfo.duration
   }
-  axios.put(test_random,info)
+  axios.put(test_random,info).then(resolve=>{
+    if (resolve){
+    }
+  })
 }
 </script>
 
