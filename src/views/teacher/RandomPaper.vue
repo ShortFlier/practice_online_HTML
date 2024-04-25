@@ -64,7 +64,7 @@ const allInfo=reactive({
   difficulty:1,
   topicMarks:[0,0,0,0,0],
   subjectId:null,
-  display:'是',
+  display:'否',
   title:'',
   description:'',
   duration:0,
@@ -96,6 +96,7 @@ function get(){
   }
   axios.put(test_random,info).then(resolve=>{
     if (resolve){
+      window.open('/#/paper/look/'+resolve.data.id, '_blank');
     }
   })
 }

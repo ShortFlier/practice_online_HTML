@@ -135,7 +135,7 @@ watch(()=>allInfo.assess,()=>{
     axios.put(topic_update,{
       type:allInfo.type,
       id:allInfo.topic.id,
-      difficulty:allInfo.assess
+      difficulty:''+allInfo.assess
     }).then(resolve=>{
       if(resolve)
         commonTip('success','感谢评价!',1000)
