@@ -1,9 +1,9 @@
 <template>
   <div class="display">
-    <div style="float: left;">
+    <div style="float: left;padding-top: 20px">
       <TopicChart></TopicChart>
     </div>
-    <div style="float: right;position: relative;top: 20px">
+    <div style="float: right;">
       <UserChart></UserChart>
     </div>
   </div>
@@ -24,6 +24,6 @@ import SubjectChart from "@/components/SubjectChart.vue";
   overflow: hidden;
 }
 .display>div{
-  height: 400px;
+  height: 450px;
 }
 </style>
