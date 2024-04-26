@@ -11,6 +11,7 @@
     "axios": "^1.6.8",
     "bootstrap-icons": "^1.11.3",
     "core-js": "^3.8.3",
+    "echarts": "^5.5.0",
     "element-plus": "^2.3.6",
     "lodash": "^4.17.21",
     "uuid": "^9.0.1",
