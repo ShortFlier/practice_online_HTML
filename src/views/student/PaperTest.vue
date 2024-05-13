@@ -172,7 +172,8 @@ onMounted(()=>{
   if(!isLogin())
     router.push('/login')
   allInfo.id=useRoute().params.id
-  allInfo.createTime=new Date().toISOString();
+  // allInfo.createTime=new Date().toISOString();
+  allInfo.createTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString();
   axios.get(stu_test+allInfo.id).then(resolve=>{
     if (resolve){
       allInfo.paperInfo=resolve.data

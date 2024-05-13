@@ -1,5 +1,5 @@
 // 信息查询地址拼接
-import {answer_apart} from "@/utils/constant";
+import {answer_apart, identity_admin} from "@/utils/constant";
 import store from "@/store";
 
 export function connectPath(object){
@@ -93,4 +93,12 @@ export function isLogin(){
 //字符串排序
 export function sortString(str) {
     return str.split('').sort().join('');
+}
+
+//获取登入信息
+export function getLoginInfo(){
+    if(store.state.identity==identity_admin)
+        return '[admin]:'+store.state.account
+    else
+        return '['+store.state.identity+']:'+store.state.id
 }

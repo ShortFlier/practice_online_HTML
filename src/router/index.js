@@ -29,6 +29,7 @@ import TestHistory from "@/views/student/TestHistory.vue";
 import TestOnline from "@/views/student/TestOnline.vue";
 import TestLook from "@/views/student/TestLook.vue";
 import PaperRelease from "@/views/teacher/PaperRelease.vue";
+import MyPaper from "@/views/teacher/MyPaper.vue";
 
 const routes = [
   {
@@ -153,6 +154,10 @@ const routes = [
       {
         path: 'release',
         component: PaperRelease
+      },
+      {
+        path: 'myPaper',
+        component: MyPaper
       },
       {
         path: 'myStudent',
