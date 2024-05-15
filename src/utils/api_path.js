@@ -66,3 +66,15 @@ export const stu_test_history='/test/history'
 export const stu_test_look='/test/look/'
 
 export const test_random='/paper/random'
+
+export const paper_update='/paper/update'
+
+export const team_teacher_get='/team/thGets'
+
+export const team_add='/team/add'
+
+export const team_delete='/team/dle'
+
+export const team_get='/team/get'
+
+export const team_members='/team/totalMember'

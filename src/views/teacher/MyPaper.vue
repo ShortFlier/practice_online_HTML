@@ -26,9 +26,9 @@
           <el-table-column  width="140">
             <template v-slot="scope">
               <el-button  type="success" size="small"   >
-                <router-link style="text-decoration: none;color: white" :to="'/paper/looks/'+scope.row.id">查看</router-link>
+                <router-link style="text-decoration: none;color: white" target="_blank" :to="'/paper/look/'+scope.row.id">查看</router-link>
               </el-button>
-              <el-button v-if="allInfo.radio=='私有'"   type="danger" size="small"  >
+              <el-button v-if="allInfo.radio=='私有'"   type="danger" size="small" @click="plc(scope.row.id)" >
                 公开
               </el-button>
             </template>
@@ -47,8 +47,9 @@ import router from "@/router";
 import {computed, reactive, watch} from "vue";
 import Page from "@/components/Page.vue";
 import axios from "axios";
-import {paper_search} from "@/utils/api_path";
+import {paper_search, paper_update} from "@/utils/api_path";
 import {getLoginInfo} from "@/utils/util";
+import {commonTip, confirmationBox} from "@/utils/tip";
 
 const allInfo=reactive({
   radio:"公开",
@@ -85,6 +86,26 @@ function paperGets(){
     if(resolve){
       allInfo.total=resolve.data.total
       allInfo.tableData=resolve.data.rows
+    }else {
+      allInfo.total=0
+      allInfo.tableData=[]
+    }
+  })
+}
+let id
+function plc(aid){
+  id=aid
+  confirmationBox('你确定公开此试卷，操作不可逆','warning',setPublic)
+}
+function setPublic(){
+  console.log('id：'+id)
+  axios.put(paper_update,{
+    id:id,
+    display:'1'
+  }).then(resolve=>{
+    if (resolve){
+      commonTip('success',resolve.msg,1000)
+      paperGets()
     }
   })
 }

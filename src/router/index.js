@@ -30,6 +30,7 @@ import TestOnline from "@/views/student/TestOnline.vue";
 import TestLook from "@/views/student/TestLook.vue";
 import PaperRelease from "@/views/teacher/PaperRelease.vue";
 import MyPaper from "@/views/teacher/MyPaper.vue";
+import Team from "@/views/teacher/Team.vue";
 
 const routes = [
   {
@@ -162,6 +163,10 @@ const routes = [
       {
         path: 'myStudent',
         component: MyStudyTeam
+      },
+      {
+        path:'team',
+        component: Team
       }]
   },
     // 试卷路由
