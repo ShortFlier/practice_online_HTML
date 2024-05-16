@@ -12,7 +12,15 @@ import _ from 'lodash';
 
 import '../axios.config'
 
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+
+
+
 const app=createApp(App)
+
+app.use(ElementPlus, {
+    locale: zhCn,
+})
 
 //ElementUI组件的引入
 app.use(ElementPlus)

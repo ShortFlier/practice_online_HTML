@@ -78,3 +78,13 @@ export const team_delete='/team/dle'
 export const team_get='/team/get'
 
 export const team_members='/team/totalMember'
+
+export const team_join='/team/join'
+
+export const team_members_gets='/team/memberGet'
+
+export const team_homework_id_get='/team/homework/'
+
+export const team_homework_set='/team/homework/set'
+
+export const team_student_gets='/team/stuTeam'

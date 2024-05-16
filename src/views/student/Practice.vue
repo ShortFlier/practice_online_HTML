@@ -150,6 +150,7 @@ function save(){
       topicId:allInfo.topic.id,
       submitId:store.state.id,
       submitAnswer:allInfo.answer,
+      subjectId:allInfo.subjectId
     }
     console.log(info)
     axios.post(practice_add,info)
