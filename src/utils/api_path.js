@@ -88,3 +88,15 @@ export const team_homework_id_get='/team/homework/'
 export const team_homework_set='/team/homework/set'
 
 export const team_student_gets='/team/stuTeam'
+
+export const team_exit='/team/exit'
+
+export const student_get_by_id='/student/idGet'
+
+export const stu_get_by_team_work='/team/stuWork'
+
+export const practice_grade_all='/practice/all'
+
+export const practice_grade_rate='/practice/rate'
+
+export const practice_grade_date='/practice/date'

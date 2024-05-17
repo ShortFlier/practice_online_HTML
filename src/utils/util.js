@@ -102,3 +102,26 @@ export function getLoginInfo(){
     else
         return '['+store.state.identity+']:'+store.state.id
 }
+
+// 获取当前时间的字符串表示（"yyyy-MM-dd HH:mm:ss"格式）
+export function getCurrentDateTimeString() {
+    let currentDate = new Date();
+    return formatDate(currentDate);
+}
+
+// 将当前时间加上指定天数并返回字符串表示（"yyyy-MM-dd HH:mm:ss"格式）
+export function addDaysToCurrentDateTime(days) {
+    let currentDate = new Date();
+    let futureDate = new Date(currentDate.getTime() + days * 24 * 60 * 60 * 1000);
+    return formatDate(futureDate);
+}
+
+// 格式化日期为"yyyy-MM-dd HH:mm:ss"格式
+export function formatDate(date) {
+    return date.getFullYear() + "-" +
+        ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + date.getDate()).slice(-2) + "T" +
+        ("0" + date.getHours()).slice(-2) + ":" +
+        ("0" + date.getMinutes()).slice(-2) + ":" +
+        ("0" + date.getSeconds()).slice(-2);
+}

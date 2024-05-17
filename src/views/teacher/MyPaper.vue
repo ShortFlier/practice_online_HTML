@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="table">
-        <el-table :data="allInfo.tableData" stripe style="width: 850px" border>
+        <el-table :data="allInfo.tableData" stripe max-height="600" style="width: 850px" border>
           <el-table-column prop="subjectName" label="学科" width="200" />
           <el-table-column prop="title" label="试卷名" width="250" />
           <el-table-column prop="duration" label="考试时间/分钟" width="120"/>

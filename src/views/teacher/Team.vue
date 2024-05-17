@@ -63,14 +63,28 @@
               </div>
             </div>
           </Mask>
-          <el-table :data="allInfo.tableData" border stripe style="width: 400px">
+          <el-table :data="allInfo.tableData" border stripe style="width: 700px">
             <el-table-column prop="name" label="昵称" width="220" />
             <el-table-column prop="createTime" label="加入日期" width="180" />
+            <el-table-column  label="作业完成情况" width="120" >
+              <template v-slot="scope">
+                <label :style="scope.row.finishRate=='100%'?'color: #adeead':''">{{scope.row.finishRate}}</label>
+              </template>
+            </el-table-column>
+            <el-table-column width="180">
+              <template v-slot="scope">
+                <el-button link type="danger" size="small" @click="out(scope.row)">踢出小组</el-button>
+                <el-button link type="primary" size="small" @click="lookWork(scope.row)">作业查看</el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
         <div class="page">
           <Page :total="allInfo.total" @pageChange="setPage"></Page>
         </div>
+        <Mask :isShow="allInfo.stuLook" @close="lookWorkClose">
+          <WorkLook :info="allInfo.info"></WorkLook>
+        </Mask>
       </div>
     </div>
   </div>
@@ -84,11 +98,19 @@ import {connectPath} from "@/utils/util";
 import store from "@/store";
 import {identity_teacher} from "@/utils/constant";
 import axios from "axios";
-import {team_get, team_homework_id_get, team_homework_set, team_members, team_members_gets} from "@/utils/api_path";
+import {
+  team_exit,
+  team_get,
+  team_homework_id_get,
+  team_homework_set,
+  team_members,
+  team_members_gets
+} from "@/utils/api_path";
 import {commonTip} from "@/utils/tip";
 import Page from "@/components/Page.vue";
 import Mask from "@/components/Mask.vue";
 import SubjectSelect from "@/components/SubjectSelect.vue";
+import WorkLook from "@/views/public/WorkLook.vue";
 const allInfo=reactive({
   team:{
     id:null,
@@ -118,7 +140,12 @@ const allInfo=reactive({
     vocal:0,
     amend:false
   },
-  workShow:false
+  workShow:false,
+  stuLook:false,
+  info:{
+    teamId:null,
+    stuId:null
+  }
 })
 //布置作业
 function workSet(){
@@ -130,6 +157,7 @@ function workSet(){
       commonTip('success',resolve.msg,1000)
       allInfo.work.amend=false
       workGet()
+      memberGet()
     }
   })
 }
@@ -184,6 +212,29 @@ function memberGet(){
       allInfo.tableData=resolve.data
     }
   })
+}
+//踢出小组
+function out(row){
+  const path=connectPath({
+    teamId:row.teamId,
+    stuId:row.stuId
+  })
+  axios.delete(team_exit+'?'+path).then(resolve=>{
+    if (resolve){
+      commonTip('success','已将'+row.name+'移除小组',1000)
+      memberGet()
+    }
+  })
+}
+//作业查看
+function lookWork(info){
+  allInfo.info.teamId=0
+  allInfo.info.teamId=info.teamId
+  allInfo.info.stuId=info.stuId
+  allInfo.stuLook=true
+}
+function lookWorkClose(){
+  allInfo.stuLook=false
 }
 onMounted(()=>{
   // if(store.state.identity!=identity_teacher||store.state.id!=useRoute().query.id)
