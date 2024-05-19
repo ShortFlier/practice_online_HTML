@@ -21,7 +21,7 @@
       </div>
     </div>
     <div style="text-align: center;color: #666666">
-      完成率：<label style="font-size: 20px;font-weight: bolder">{{allInfo.rate}}</label>
+      完成率：<label class="last" :style="allInfo.rate=='100%'?'color: #1fd71f;':'color:red'">{{allInfo.rate}}</label>
     </div>
   </div>
 </template>
@@ -204,5 +204,9 @@ watch(()=>props.info,()=>{
 }
 .out{
   width: 1000px;
+}
+.last{
+  font-size: 20px;
+  font-weight: bolder;
 }
 </style>

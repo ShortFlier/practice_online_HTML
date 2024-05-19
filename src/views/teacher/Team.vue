@@ -68,7 +68,7 @@
             <el-table-column prop="createTime" label="加入日期" width="180" />
             <el-table-column  label="作业完成情况" width="120" >
               <template v-slot="scope">
-                <label :style="scope.row.finishRate=='100%'?'color: #adeead':''">{{scope.row.finishRate}}</label>
+                <label :style="scope.row.finishRate=='100%'?'color: #1fd71f;':'color:red'">{{scope.row.finishRate}}</label>
               </template>
             </el-table-column>
             <el-table-column width="180">
@@ -274,5 +274,6 @@ onMounted(()=>{
 }
 .page{
   margin-top: 5px;
+
 }
 </style>

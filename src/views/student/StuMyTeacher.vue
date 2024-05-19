@@ -13,7 +13,11 @@
         <el-table :data="allInfo.tableData" stripe style="width: 700px" border>
           <el-table-column prop="name" label="组名" width="240" />
           <el-table-column prop="thName" label="教师" width="160" />
-          <el-table-column prop="finishRate" label="作业完成情况" width="120" />
+          <el-table-column  label="作业完成情况" width="120" >
+            <template v-slot="scope">
+              <label :style="scope.row.finishRate=='100%'?'color: #1fd71f;':'color:red'">{{scope.row.finishRate}}</label>
+            </template>
+          </el-table-column>
           <el-table-column width="180">
             <template v-slot="scope">
               <el-button link type="danger" size="small" @click="exit(scope.row)">退出小组</el-button>

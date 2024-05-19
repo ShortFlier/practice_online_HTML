@@ -21,7 +21,7 @@
           <div id="rate" class="rate_chart"></div>
         </div>
         <div>
-          <div style="text-align: center; font-weight: bold;font-size: 20px;padding-top: 10px;margin-left: 100px">练习记录</div>
+<!--          <div style="text-align: center; font-weight: bold;font-size: 20px;padding-top: 10px;margin-left: 100px">练习记录</div>-->
           <div id="date" class="date_chart"></div>
         </div>
       </div>

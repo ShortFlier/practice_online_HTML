@@ -17,7 +17,11 @@
     </div>
     <div class="table">
       <el-table :data="allInfo.tableData" stripe style="width: 860px" border>
-        <el-table-column prop="name" label="组名" width="500" />
+        <el-table-column  label="组名" width="500" >
+          <template v-slot="scope">
+            <div style="font-size: 20px;font-weight: bold">{{scope.row.name}}</div>
+          </template>
+        </el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="180"/>
         <el-table-column width="180">
           <template v-slot="scope">
