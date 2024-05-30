@@ -16,7 +16,7 @@
         {{topicInfo.analyse}}
       </div>
     </div>
-    <div class="replyCon" v-if="props.reply!=reply_look&&!isEmpty(myAnswer)">
+    <div class="replyCon" v-if="reply==reply_test||(props.reply!=reply_look&&!isEmpty(myAnswer))">
       <div>你的回答</div>
       <div class="input"  v-for="(item, index) in answerNumber" :key="uuidv4">
         <div class="lbl">问题{{ index + 1 }}</div>

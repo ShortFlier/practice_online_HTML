@@ -19,7 +19,6 @@
         <div :class="activeId==4?'item active':'item'" @click="goto(4)">题目管理</div>
         <div :class="activeId==5?'item active':'item'" @click="goto(5)">试卷管理</div>
         <div :class="activeId==6?'item active':'item'" @click="goto(6)">审核管理</div>
-        <div :class="activeId==7?'item active':'item'" @click="goto(7)">其他</div>
       </div>
       <div class="display">
         <router-view></router-view>

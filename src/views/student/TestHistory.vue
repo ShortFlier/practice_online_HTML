@@ -59,7 +59,8 @@ function getData(){
   }
   axios.get(stu_test_history+'?'+connectPath(info)).then(resolve=>{
     if(resolve){
-      allInfo.tableData=resolve.data
+      allInfo.total=resolve.data.total
+      allInfo.tableData=resolve.data.rows
     }
   })
 }

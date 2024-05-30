@@ -82,14 +82,23 @@ watch(()=>allinfo.searchInfo,()=>{
 })
 function canve(){
   const chartDom1= document.querySelector('#all');
-  echarts.dispose(chartDom1)
-  echarts.init(chartDom1).setOption(allChart)
+  if(chartDom1){
+    echarts.dispose(chartDom1)
+    echarts.init(chartDom1).setOption(allChart)
+  }
+
   const chartDom2=document.querySelector('#rate')
-  echarts.dispose(chartDom2)
-  echarts.init(chartDom2).setOption(rate)
+  if(chartDom2){
+    echarts.dispose(chartDom2)
+    echarts.init(chartDom2).setOption(rate)
+  }
+
   const chartDom3=document.querySelector('#date')
-  echarts.dispose(chartDom3)
-  echarts.init(chartDom3).setOption(date)
+  if(chartDom3){
+    echarts.dispose(chartDom3)
+    echarts.init(chartDom3).setOption(date)
+  }
+
 }
 function setSubject(id){
   allinfo.searchInfo.subjectId=id
